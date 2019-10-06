@@ -10,7 +10,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'courses',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
