@@ -1,0 +1,33 @@
+<div class="col-md-6 offset-3">
+  <h3>Add Course</h3>
+  <div class="card">
+    <div class="card-body">
+      <form>
+        <div class="form-group">
+          <input type="text" name="course" placeholder="Course name" [(ngModel)]="course.name" class="form-control" autofocus>
+        </div>
+        <div class="form-group">
+            <input type="text" name="level" placeholder="Course level" [(ngModel)]="course.level" class="form-control">
+        </div>
+        <div class="form-group">
+            <input type="text" name="year" placeholder="Year in which the course will be opened" [(ngModel)]="course.year" class="form-control">
+        </div>
+        <div class="form-group">
+            <input type="text" name="day" placeholder="Day of the course" [(ngModel)]="course.day" class="form-control">
+        </div>
+        <div class="form-group">
+            <input type="text" name="time" placeholder="Time of the course" [(ngModel)]="course.time" class="form-control">
+        </div>
+        <div class="form-group">
+            <input type="text" name="building" placeholder="Church building" [(ngModel)]="course.building" class="form-control">
+        </div>
+        <div class="form-group">
+            <input type="text" name="instructor_id" placeholder="Instructor_id" [(ngModel)]="course.instructor_id" class="form-control">
+        </div>
+        <button class="btn btn-success btn-block" (click)="saveNewCourse()">
+          SAVE
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

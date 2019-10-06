@@ -1,0 +1,14 @@
+<h3>Instructors</h3>
+
+<div class="row bg-warning p-1">
+  <div class="col text-white text-center">Nombre</div>
+  <div class="col text-white text-center">Email</div>
+  <div class="col text-white text-center">Phone</div>
+  <div class="col text-white text-center">Edit</div>
+</div>
+<div class="row border border-secondary p-1" *ngFor="let instructor of instructors">
+  <div class="col text-center">{{instructor.name}} {{instructor.last_name}}</div>
+  <div class="col text-center">{{instructor.email}}</div>
+  <div class="col text-center">{{instructor.phone}}</div>
+  <div class="col text-center"><a href="#">Edit</a></div>
+</div>
