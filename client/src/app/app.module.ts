@@ -9,6 +9,7 @@ import { CourseFormComponent } from './components/course-form/course-form.compon
 import { StudentFormComponent } from './components/student-form/student-form.component';
 import { InstructorFormComponent } from './components/instructor-form/instructor-form.component';
 import { AttendanceFormComponent } from './components/attendance-form/attendance-form.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
 import { AttendanceListComponent } from './components/attendance-list/attendance-list.component';
 import { CourseListComponent } from './components/course-list/course-list.component';
 import { StudentListComponent } from './components/student-list/student-list.component';
@@ -19,7 +20,6 @@ import { CoursesService} from './services/courses.service';
 import { AttendanceService } from './services/attendance.service';
 import { InstructorsService } from './services/instructors.service';
 import { StudentsService } from './services/students.service';
-import { LoginFormComponent } from './components/login-form/login-form.component';
 
 @NgModule({
   declarations: [
