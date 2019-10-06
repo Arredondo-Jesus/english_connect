@@ -19,6 +19,7 @@ import { CoursesService} from './services/courses.service';
 import { AttendanceService } from './services/attendance.service';
 import { InstructorsService } from './services/instructors.service';
 import { StudentsService } from './services/students.service';
+import { LoginFormComponent } from './components/login-form/login-form.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { StudentsService } from './services/students.service';
     InstructorFormComponent,
     AttendanceFormComponent,
     AttendanceListComponent,
+    LoginFormComponent,
     CourseListComponent,
     StudentListComponent,
     InstructorListComponent
