@@ -15,7 +15,7 @@ export class CourseFormComponent implements OnInit {
 
   course: Course = {
     id: 0,
-    level: 0,
+    level: 2019,
     year: '',
     day: '',
     time: '',
