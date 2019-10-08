@@ -28,7 +28,7 @@ export class InstructorsService {
     return this.http.delete(`${this.API_URI}/instructors/${id}`);
   }
 
-  updateInstructor(id: string, updatedInstructor: Instructor) {
-    this.http.put(`${this.API_URI}/instructors/${id}`, updatedInstructor);
+  updateInstructor(id: string | number, updatedInstructor: Instructor) {
+    return this.http.put(`${this.API_URI}/instructors/${id}`, updatedInstructor);
   }
 }

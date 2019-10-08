@@ -1,7 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { InstructorsService } from '../../services/instructors.service';
 import { Instructor } from 'src/app/models/Instructor';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-instructor-form',
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class InstructorFormComponent implements OnInit {
 
-  constructor(private instructorService: InstructorsService, private router: Router) { }
+  constructor(private instructorService: InstructorsService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   @HostBinding ('class') classes = 'row';
 
@@ -24,7 +24,21 @@ export class InstructorFormComponent implements OnInit {
     modified_on: new Date()
   };
 
+  edit = false;
+
   ngOnInit() {
+    const params = this.activatedRoute.snapshot.params;
+    if (params.id) {
+      this.instructorService.getInstructor(params.id)
+        .subscribe(
+          res => {
+            console.log(res);
+            this.instructor = res;
+            this.edit = true;
+          },
+          err => console.log(err)
+        );
+    }
   }
 
   saveNewInstructor() {
@@ -41,6 +55,17 @@ export class InstructorFormComponent implements OnInit {
       );
 
   }
+  updateInstructor() {
+    delete this.instructor.created_at;
 
+    this.instructorService.updateInstructor(this.instructor.id, this.instructor)
+        .subscribe(
+          res => {
+            console.log(res);
+            this.router.navigate(['/instructors']);
+          },
+          err => console.log(err)
+        );
+  }
 
 }

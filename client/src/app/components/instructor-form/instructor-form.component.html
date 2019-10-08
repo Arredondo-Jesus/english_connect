@@ -15,7 +15,7 @@
         <div class="form-group">
             <input type="text" name="phone" placeholder="Instructor phone" [(ngModel)]="instructor.phone" class="form-control">
         </div>
-        <button class="btn btn-success btn-block" (click)="saveNewInstructor()">
+        <button class="btn btn-success btn-block" (click)="edit ? updateInstructor() : saveNewInstructor()">
           SAVE
         </button>
       </form>

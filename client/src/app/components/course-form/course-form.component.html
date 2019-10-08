@@ -24,7 +24,7 @@
         <div class="form-group">
             <input type="text" name="instructor_id" placeholder="Instructor_id" [(ngModel)]="course.instructor_id" class="form-control">
         </div>
-        <button class="btn btn-success btn-block" (click)="saveNewCourse()">
+        <button class="btn btn-success btn-block" (click)="edit ? updateCourse() : saveNewCourse()">
           SAVE
         </button>
       </form>

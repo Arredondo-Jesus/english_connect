@@ -28,7 +28,7 @@ export class CoursesService {
     return this.http.delete(`${this.API_URI}/courses/${id}`);
   }
 
-  updateCourse(id: string, updatedCourse: Course) {
-    this.http.put(`${this.API_URI}/courses/${id}`, updatedCourse);
+  updateCourse(id: string | number, updatedCourse: Course) {
+    return this.http.put(`${this.API_URI}/courses/${id}`, updatedCourse);
   }
 }

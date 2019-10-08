@@ -11,6 +11,6 @@
   <div class="col text-center">{{instructor.name}} {{instructor.last_name}}</div>
   <div class="col text-center">{{instructor.email}}</div>
   <div class="col text-center">{{instructor.phone}}</div>
-  <div class="col text-center"><a href="#">Edit</a></div>
+  <div [routerLink]="['/instructor/edit', instructor.id]" class="col text-center"><button class="btn btn-link p-0">Edit</button> </div>
   <div class="col text-center"><button class="p-0 btn btn-link" (click)="deleteInstructor(instructor.id)">Delete</button></div>
 </div>

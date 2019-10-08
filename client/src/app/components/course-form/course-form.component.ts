@@ -1,8 +1,9 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { Course } from 'src/app/models/Course';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { CoursesService } from '../../services/courses.service';
+import { UseExistingWebDriver } from 'protractor/built/driverProviders';
 
 @Component({
   selector: 'app-course-form',
@@ -15,7 +16,7 @@ export class CourseFormComponent implements OnInit {
 
   course: Course = {
     id: 0,
-    level: 2019,
+    level: 0,
     year: '',
     day: '',
     time: '',
@@ -24,9 +25,23 @@ export class CourseFormComponent implements OnInit {
     instructor_id: 0
   };
 
-  constructor(private courseService: CoursesService, private router: Router) { }
+  edit = false;
+
+  constructor(private courseService: CoursesService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    const params = this.activatedRoute.snapshot.params;
+    if (params.id) {
+      this.courseService.getCourse(params.id)
+        .subscribe(
+          res => {
+            console.log(res);
+            this.course = res;
+            this.edit = true;
+          },
+          err => console.log(err)
+        );
+    }
   }
 
   saveNewCourse() {
@@ -42,6 +57,19 @@ export class CourseFormComponent implements OnInit {
          err => console.log(err)
       );
 
+  }
+
+  updateCourse() {
+    delete this.course.created_at;
+
+    this.courseService.updateCourse(this.course.id, this.course)
+        .subscribe(
+          res => {
+            console.log(res);
+            this.router.navigate(['/courses']);
+          },
+          err => console.log(err)
+        );
   }
 
 }

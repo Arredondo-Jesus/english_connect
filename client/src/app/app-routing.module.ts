@@ -27,11 +27,19 @@ const routes: Routes = [
     component: InstructorFormComponent
   },
   {
+    path: 'instructor/edit/:id',
+    component: InstructorFormComponent
+  },
+  {
     path: 'students',
     component: StudentListComponent
   },
   {
     path: 'course/add',
+    component: CourseFormComponent
+  },
+  {
+    path: 'course/edit/:id',
     component: CourseFormComponent
   },
   {

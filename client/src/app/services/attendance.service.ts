@@ -28,7 +28,7 @@ export class AttendanceService {
     return this.http.delete(`${this.API_URI}/attendance/${id}`);
   }
 
-  updateAttendance(id: string, updatedAttendance: Attendance) {
-    this.http.put(`${this.API_URI}/attendance/${id}`, updatedAttendance);
+  updateAttendance(id: string | number, updatedAttendance: Attendance) {
+    return this.http.put(`${this.API_URI}/attendance/${id}`, updatedAttendance);
   }
 }
