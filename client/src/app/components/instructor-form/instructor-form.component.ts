@@ -49,7 +49,7 @@ export class InstructorFormComponent implements OnInit {
       .subscribe(
         res => {
           console.log(this.instructor);
-          this.router.navigate(['/instructors']);
+          this.router.navigate(['instructors']);
         },
          err => console.log(err)
       );
@@ -62,7 +62,7 @@ export class InstructorFormComponent implements OnInit {
         .subscribe(
           res => {
             console.log(res);
-            this.router.navigate(['/instructors']);
+            this.router.navigate(['instructors']);
           },
           err => console.log(err)
         );

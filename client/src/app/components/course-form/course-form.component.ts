@@ -52,7 +52,7 @@ export class CourseFormComponent implements OnInit {
       .subscribe(
         res => {
           console.log(this.course);
-          this.router.navigate(['/courses']);
+          this.router.navigate(['courses']);
         },
          err => console.log(err)
       );
@@ -66,7 +66,7 @@ export class CourseFormComponent implements OnInit {
         .subscribe(
           res => {
             console.log(res);
-            this.router.navigate(['/courses']);
+            this.router.navigate(['courses']);
           },
           err => console.log(err)
         );
