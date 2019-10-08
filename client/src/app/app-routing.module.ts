@@ -6,6 +6,7 @@ import { InstructorListComponent } from './components/instructor-list/instructor
 import { StudentListComponent } from './components/student-list/student-list.component';
 import { CourseFormComponent } from './components/course-form/course-form.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
+import { InstructorFormComponent } from './components/instructor-form/instructor-form.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'instructors',
     component: InstructorListComponent
+  },
+  {
+    path: 'instructors/add',
+    component: InstructorFormComponent
   },
   {
     path: 'students',

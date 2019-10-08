@@ -1,1 +1,24 @@
-<p>instructor-form works!</p>
+<div class="col-md-6 offset-3">
+  <h3>Add Instructor</h3>
+  <div class="card">
+    <div class="card-body">
+      <form>
+        <div class="form-group">
+          <input type="text" name="instructor" placeholder="Instructor name" [(ngModel)]="instructor.name" class="form-control" autofocus>
+        </div>
+        <div class="form-group">
+            <input type="text" name="lastName" placeholder="Instructor last name" [(ngModel)]="instructor.last_name" class="form-control">
+        </div>
+        <div class="form-group">
+            <input type="text" name="email" placeholder="Instructor email" [(ngModel)]="instructor.email" class="form-control">
+        </div>
+        <div class="form-group">
+            <input type="text" name="phone" placeholder="Instructor phone" [(ngModel)]="instructor.phone" class="form-control">
+        </div>
+        <button class="btn btn-success btn-block" (click)="saveNewInstructor()">
+          SAVE
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

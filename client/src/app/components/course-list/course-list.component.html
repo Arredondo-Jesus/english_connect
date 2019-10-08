@@ -1,4 +1,4 @@
-<h3>Cursos</h3>
+<h3>Courses</h3>
 <div class="row bg-primary p-1">
   <div class="col text-white text-center">Course</div>
   <div class="col text-white text-center">Day</div>
@@ -6,12 +6,14 @@
   <div class="col text-white text-center">Building</div>
   <div class="col text-white text-center">Details</div>
   <div class="col text-white text-center">Edit</div>
+  <div class="col text-white text-center">Delete</div>
 </div>
 <div class="row p-1 border border-secondary" *ngFor="let course of courses">
   <div class="col text-center">{{course.name}} {{course.level}} {{course.year}}</div>
   <div class="col text-center">{{course.day}}</div>
   <div class="col text-center">{{course.time}}</div>
   <div class="col text-center">{{course.building}}</div>
-  <div class="col text-center"><a routerLink="#">Details</a></div>
-  <div class="col text-center"><a routerLink="/course/add">Edit</a></div>
+  <div class="col text-center"><a href="">Details</a></div>
+  <div class="col text-center"><a href="">Edit</a></div>
+  <div class="col text-center"><button class="btn btn-link p-0" (click)="deleteCourse(course.id)">Delete</button></div>
 </div>

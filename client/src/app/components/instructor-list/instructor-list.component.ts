@@ -14,9 +14,23 @@ export class InstructorListComponent implements OnInit {
   instructors: any = [];
 
   ngOnInit() {
+    this.getInstructors();
+  }
+
+  getInstructors() {
     this.instructorsService.getInstructors().subscribe(
       res => {
         this.instructors = res;
+      },
+      err => console.log(err)
+    );
+  }
+
+  deleteInstructor(id: string) {
+    this.instructorsService.deleteInstructor(id).subscribe(
+      res => {
+        console.log(res);
+        this.getInstructors();
       },
       err => console.log(err)
     );
