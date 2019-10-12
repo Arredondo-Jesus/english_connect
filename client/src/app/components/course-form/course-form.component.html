@@ -1,5 +1,5 @@
 <div class="col-md-6 offset-3">
-  <h3>Add Course</h3>
+  <h3>Add / Edit Course</h3>
   <div class="card">
     <div class="card-body">
       <form>
@@ -21,10 +21,7 @@
         <div class="form-group">
             <input type="text" name="building" placeholder="Church building" [(ngModel)]="course.building" class="form-control">
         </div>
-        <div class="form-group">
-            <input type="text" name="instructor_id" placeholder="Instructor_id" [(ngModel)]="course.instructor_id" class="form-control">
-        </div>
-        <button class="btn btn-success btn-block" (click)="edit ? updateCourse() : saveNewCourse()">
+        <button class="btn btn-primary btn-block" (click)="edit ? updateCourse() : saveNewCourse()">
           SAVE
         </button>
       </form>

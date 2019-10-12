@@ -3,7 +3,6 @@ import { Course } from 'src/app/models/Course';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { CoursesService } from '../../services/courses.service';
-import { UseExistingWebDriver } from 'protractor/built/driverProviders';
 
 @Component({
   selector: 'app-course-form',
@@ -16,13 +15,12 @@ export class CourseFormComponent implements OnInit {
 
   course: Course = {
     id: 0,
-    level: 0,
+    level: 1,
     year: '',
     day: '',
     time: '',
     building: '',
-    created_at: new Date(),
-    instructor_id: 0
+    created_at: new Date()
   };
 
   edit = false;
@@ -30,6 +28,10 @@ export class CourseFormComponent implements OnInit {
   constructor(private courseService: CoursesService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+   this.getCourse();
+  }
+
+  getCourse() {
     const params = this.activatedRoute.snapshot.params;
     if (params.id) {
       this.courseService.getCourse(params.id)
@@ -71,6 +73,5 @@ export class CourseFormComponent implements OnInit {
           err => console.log(err)
         );
   }
-
 }
 

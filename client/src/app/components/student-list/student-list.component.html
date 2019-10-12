@@ -1,1 +1,18 @@
-<p>student-list works!</p>
+<h3>Students</h3>
+<div class="row bg-danger p-1">
+  <div class="col text-white text-center">Name</div>
+  <div class="col text-white text-center">Age</div>
+  <div class="col text-white text-center">Email</div>
+  <div class="col text-white text-center">Phone</div>
+  <div class="col text-white text-center">Edit</div>
+  <div class="col text-white text-center">Delete</div>
+</div>
+<div class="row p-1 border border-secondary" *ngFor="let student of students">
+  <div class="col text-center">{{student.name}} {{student.last_name}}</div>
+  <div class="col text-center">{{student.age}}</div>
+  <div class="col text-center">{{student.email}}</div>
+  <div class="col text-center">{{student.phone}}</div>
+  <div [routerLink]="['/student/edit', student.id]" class="col text-center"><button class="btn btn-link p-0">Edit</button></div>
+  <div class="col text-center"><button class="btn btn-link p-0" (click)="deleteStudent(student.id)">Delete</button></div>
+</div>
+

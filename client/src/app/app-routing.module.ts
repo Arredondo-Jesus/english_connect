@@ -7,6 +7,7 @@ import { StudentListComponent } from './components/student-list/student-list.com
 import { CourseFormComponent } from './components/course-form/course-form.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { InstructorFormComponent } from './components/instructor-form/instructor-form.component';
+import { StudentFormComponent } from './components/student-form/student-form.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,14 @@ const routes: Routes = [
   {
     path: 'courses',
     component: CourseListComponent
+  },
+  {
+    path: 'course/add',
+    component: CourseFormComponent
+  },
+  {
+    path: 'course/edit/:id',
+    component: CourseFormComponent
   },
   {
     path: 'instructors',
@@ -35,12 +44,12 @@ const routes: Routes = [
     component: StudentListComponent
   },
   {
-    path: 'course/add',
-    component: CourseFormComponent
+    path: 'student/add',
+    component: StudentFormComponent
   },
   {
-    path: 'course/edit/:id',
-    component: CourseFormComponent
+    path: 'student/edit/:id',
+    component: StudentFormComponent
   },
   {
     path: 'login',
