@@ -6,4 +6,5 @@ export interface Instructor {
   phone?: string;
   created_at?: Date;
   modified_on?: Date;
+  status?: string;
 }

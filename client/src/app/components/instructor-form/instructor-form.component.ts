@@ -21,7 +21,8 @@ export class InstructorFormComponent implements OnInit {
     phone: '',
     email: '',
     created_at: new Date(),
-    modified_on: new Date()
+    modified_on: new Date(),
+    status: ''
   };
 
   edit = false;
@@ -44,6 +45,7 @@ export class InstructorFormComponent implements OnInit {
   saveNewInstructor() {
     delete this.instructor.created_at;
     delete this.instructor.id;
+    delete this.instructor.status;
 
     this.instructorService.saveInstructor(this.instructor)
       .subscribe(
@@ -57,6 +59,7 @@ export class InstructorFormComponent implements OnInit {
   }
   updateInstructor() {
     delete this.instructor.created_at;
+    delete this.instructor.status;
 
     this.instructorService.updateInstructor(this.instructor.id, this.instructor)
         .subscribe(

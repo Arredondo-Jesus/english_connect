@@ -20,7 +20,8 @@ export class CourseFormComponent implements OnInit {
     day: '',
     time: '',
     building: '',
-    created_at: new Date()
+    created_at: new Date(),
+    status: ''
   };
 
   edit = false;
@@ -49,6 +50,7 @@ export class CourseFormComponent implements OnInit {
   saveNewCourse() {
     delete this.course.created_at;
     delete this.course.id;
+    delete this.course.status;
 
     this.courseService.saveCourse(this.course)
       .subscribe(
@@ -63,6 +65,7 @@ export class CourseFormComponent implements OnInit {
 
   updateCourse() {
     delete this.course.created_at;
+    delete this.course.status;
 
     this.courseService.updateCourse(this.course.id, this.course)
         .subscribe(

@@ -4,4 +4,5 @@ export interface Attendance {
   attendance_value?: string;
   created_at?: Date;
   modified_on?: Date;
+  status?: string;
 }

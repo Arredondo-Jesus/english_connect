@@ -11,7 +11,7 @@ class InstructorRoutes {
         this.router.get('/', instructorController_1.instructorController.list);
         this.router.get('/:id', instructorController_1.instructorController.getOne);
         this.router.post('/', instructorController_1.instructorController.create);
-        this.router.delete('/:id', instructorController_1.instructorController.delete);
+        this.router.put('/delete/:id', instructorController_1.instructorController.delete);
         this.router.put('/:id', instructorController_1.instructorController.update);
     }
 }

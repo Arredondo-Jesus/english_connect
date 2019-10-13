@@ -16,7 +16,7 @@ export class CoursesService {
     return this.http.get(`${this.API_URI}/courses`);
   }
 
-  getCourse(id: string) {
+  getCourse(id: string | number) {
     return this.http.get(`${this.API_URI}/courses/${id}`);
   }
 
@@ -24,8 +24,8 @@ export class CoursesService {
     return this.http.post(`${this.API_URI}/courses`, course);
   }
 
-  deleteCourse(id: string) {
-    return this.http.delete(`${this.API_URI}/courses/${id}`);
+  deleteCourse(id: string | number, updatedStatus: Course) {
+    return this.http.put(`${this.API_URI}/courses/delete/${id}`, updatedStatus);
   }
 
   updateCourse(id: string | number, updatedCourse: Course) {

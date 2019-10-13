@@ -9,4 +9,5 @@ export interface Course {
   created_at?: Date;
   modified_on?: Date;
   instructor_id?: number;
+  status?: string;
 }

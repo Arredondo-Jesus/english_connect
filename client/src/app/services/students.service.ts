@@ -24,8 +24,8 @@ export class StudentsService {
     return this.http.post(`${this.API_URI}/students`, student);
   }
 
-  deleteStudent(id: string) {
-    return this.http.delete(`${this.API_URI}/students/${id}`);
+  deleteStudent(id: string | number, updatedStatus: Student) {
+    return this.http.put(`${this.API_URI}/students/delete/${id}`, updatedStatus);
   }
 
   updateStudent(id: string | number, updatedStudent: Student) {

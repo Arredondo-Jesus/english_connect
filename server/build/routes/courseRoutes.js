@@ -11,7 +11,7 @@ class CourseRoutes {
         this.router.get('/', courseController_1.courseController.list);
         this.router.get('/:id', courseController_1.courseController.getOne);
         this.router.post('/', courseController_1.courseController.create);
-        this.router.delete('/:id', courseController_1.courseController.delete);
+        this.router.put('/delete/:id', courseController_1.courseController.delete);
         this.router.put('/:id', courseController_1.courseController.update);
     }
 }

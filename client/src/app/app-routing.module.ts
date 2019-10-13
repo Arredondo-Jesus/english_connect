@@ -28,6 +28,10 @@ const routes: Routes = [
     component: CourseFormComponent
   },
   {
+    path: 'course/delete/:id',
+    component: CourseListComponent
+  },
+  {
     path: 'instructors',
     component: InstructorListComponent
   },
@@ -40,6 +44,10 @@ const routes: Routes = [
     component: InstructorFormComponent
   },
   {
+    path: 'instructor/delete/:id',
+    component: InstructorListComponent
+  },
+  {
     path: 'students',
     component: StudentListComponent
   },
@@ -50,6 +58,10 @@ const routes: Routes = [
   {
     path: 'student/edit/:id',
     component: StudentFormComponent
+  },
+  {
+    path: 'student/delete/:id',
+    component: StudentListComponent
   },
   {
     path: 'login',

@@ -22,7 +22,8 @@ export class StudentFormComponent implements OnInit {
     age: '',
     email: '',
     phone: '',
-    created_at: new Date()
+    created_at: new Date(),
+    status: ''
   };
 
   edit = false;
@@ -51,6 +52,7 @@ export class StudentFormComponent implements OnInit {
   saveNewStudent() {
     delete this.student.created_at;
     delete this.student.id;
+    delete this.student.status;
 
     this.studentsService.saveStudent(this.student)
       .subscribe(
@@ -65,6 +67,7 @@ export class StudentFormComponent implements OnInit {
 
   updateStudent() {
     delete this.student.created_at;
+    delete this.student.status;
 
     this.studentsService.updateStudent(this.student.id, this.student)
         .subscribe(

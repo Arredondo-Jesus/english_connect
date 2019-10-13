@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { StudentsService } from './../../services/students.service';
+import { Router } from '@angular/router';
+
+import { StudentsService } from '../../services/students.service';
+import { Student } from 'src/app/models/Student';
 
 @Component({
   selector: 'app-student-list',
@@ -8,17 +11,21 @@ import { StudentsService } from './../../services/students.service';
 })
 export class StudentListComponent implements OnInit {
 
-  constructor(private studentsSevervice: StudentsService) { }
-
   students: any = [];
 
+  student: Student = {
+    id: 0,
+    status: 'inactive'
+  };
+
+  constructor(private studentsService: StudentsService, private router: Router) { }
 
   ngOnInit() {
     this.getStudents();
   }
 
   getStudents() {
-    this.studentsSevervice.getStudents().subscribe(
+    this.studentsService.getStudents().subscribe(
       res => {
         this.students = res;
       },
@@ -26,11 +33,12 @@ export class StudentListComponent implements OnInit {
     );
   }
 
-  deleteStudent(id: string) {
-    this.studentsSevervice.deleteStudent(id).subscribe(
+  deleteStudent(id: number) {
+    this.student.id = id;
+    this.studentsService.deleteStudent(this.student.id, this.student).subscribe(
       res => {
         console.log(res);
-        this.getStudents();
+        this.router.navigate(['students']);
       },
       err => console.log(err)
     );

@@ -26,7 +26,7 @@ class InstructorController {
 
     public async delete (req: Request, res: Response): Promise<void>{
         const { id } = req.params;
-        await pool.query('DELETE FROM instructor WHERE id = ?', [id]);
+        await pool.query('UPDATE instructor SET status = ? WHERE id = ?', [req.body, id]);
         res.json({text: 'Instructor ' + id + ' was deleted successfully'});
     }
 

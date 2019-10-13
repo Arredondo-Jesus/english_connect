@@ -39,7 +39,7 @@ class CourseController {
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            yield database_1.default.query('DELETE FROM course WHERE id = ?', [id]);
+            yield database_1.default.query('UPDATE course SET status = ? WHERE id = ?', [req.body, id]);
             res.json({ text: 'Course ' + id + ' was deleted successfully' });
         });
     }

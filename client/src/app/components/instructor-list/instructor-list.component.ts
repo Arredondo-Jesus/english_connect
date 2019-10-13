@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { InstructorsService } from '../../services/instructors.service';
+import { Instructor } from 'src/app/models/Instructor';
 
 @Component({
   selector: 'app-instructor-list',
@@ -9,15 +11,20 @@ import { InstructorsService } from '../../services/instructors.service';
 })
 export class InstructorListComponent implements OnInit {
 
-  constructor(private instructorsService: InstructorsService ) { }
-
   instructors: any = [];
 
+  intructor: Instructor = {
+    id: 0,
+    status: 'inactive'
+  };
+
+  constructor(private instructorsService: InstructorsService, private router: Router) { }
+
   ngOnInit() {
-    this.getInstructors();
+    this.getIntructors();
   }
 
-  getInstructors() {
+  getIntructors() {
     this.instructorsService.getInstructors().subscribe(
       res => {
         this.instructors = res;
@@ -26,11 +33,12 @@ export class InstructorListComponent implements OnInit {
     );
   }
 
-  deleteInstructor(id: string) {
-    this.instructorsService.deleteInstructor(id).subscribe(
+  deleteInstructor(id: number) {
+    this.intructor.id = id;
+    this.instructorsService.deleteInstructor(this.intructor.id, this.intructor).subscribe(
       res => {
         console.log(res);
-        this.getInstructors();
+        this.router.navigate(['instructors']);
       },
       err => console.log(err)
     );
