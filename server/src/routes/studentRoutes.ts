@@ -11,6 +11,7 @@ class StudentRoutes {
     config(): void {
         this.router.get('/', studentController.list);
         this.router.get('/:id', studentController.getOne)
+        this.router.get('/group/:id/:date', studentController.getByCourse)
         this.router.post('/', studentController.create);
         this.router.put('/delete/:id', studentController.delete);
         this.router.put('/:id', studentController.update);

@@ -8,12 +8,22 @@ import { CourseFormComponent } from './components/course-form/course-form.compon
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { InstructorFormComponent } from './components/instructor-form/instructor-form.component';
 import { StudentFormComponent } from './components/student-form/student-form.component';
+import { AttendanceListComponent } from './components/attendance-list/attendance-list.component';
+import { StudentListGroupComponent } from './components/student-list-group/student-list-group.component';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
+  },
+  {
+    path: 'attendance/group/:id',
+    component: AttendanceListComponent
+  },
+  {
+    path: 'attendance/delete/:id',
+    component: AttendanceListComponent
   },
   {
     path: 'courses',
@@ -62,6 +72,10 @@ const routes: Routes = [
   {
     path: 'student/delete/:id',
     component: StudentListComponent
+  },
+  {
+    path: 'student/group/:id/:date',
+    component: StudentListGroupComponent
   },
   {
     path: 'login',

@@ -4,7 +4,7 @@
   <div class="col text-white text-center">Day</div>
   <div class="col text-white text-center">Time</div>
   <div class="col text-white text-center">Building</div>
-  <div class="col text-white text-center">Details</div>
+  <div class="col text-white text-center">Attendance</div>
   <div class="col text-white text-center">Edit</div>
   <div class="col text-white text-center">Delete</div>
 </div>
@@ -13,7 +13,7 @@
   <div class="col text-center">{{course.day}}</div>
   <div class="col text-center">{{course.time}}</div>
   <div class="col text-center">{{course.building}}</div>
-  <div class="col text-center"><button class="btn btn-link p-0">Details</button></div>
+  <div [routerLink]="['/attendance/group', course.id]" class="col text-center"><button class="btn btn-link p-0">Details</button></div>
   <div [routerLink]="['/course/edit', course.id]" class="col text-center"><button class="btn btn-link p-0">Edit</button></div>
   <div class="col text-center"><button class="btn btn-link p-0" (click)="deleteCourse(course.id)">Delete</button></div>
 </div>

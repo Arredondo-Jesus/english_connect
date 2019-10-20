@@ -5,7 +5,7 @@ import { text } from 'body-parser';
 class CourseController {
 
     public async list (req: Request, res: Response){
-        const courses = await pool.query('SELECT * FROM course');
+        const courses = await pool.query("SELECT * FROM course c WHERE c.status = 'active'");
         res.json(courses);
     }
 

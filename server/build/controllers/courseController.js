@@ -16,7 +16,7 @@ const database_1 = __importDefault(require("../database"));
 class CourseController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const courses = yield database_1.default.query('SELECT * FROM course');
+            const courses = yield database_1.default.query("SELECT * FROM course c WHERE c.status = 'active'");
             res.json(courses);
         });
     }

@@ -4,7 +4,7 @@ import pool from '../database';
 class StudentController {
 
     public async list (req: Request, res: Response){
-        const students = await pool.query('SELECT * FROM student');
+        const students = await pool.query("SELECT * FROM student s WHERE s.status = 'active'");
         res.json(students);
     }
 
@@ -17,6 +17,25 @@ class StudentController {
         }
 
         res.status(404).json(res.json({text: 'Student was not found'}));
+    }
+
+    public async getByCourse (req: Request, res: Response): Promise <void>{
+        const { id } = req.params;
+        const { date } = req.params;
+
+        const query = `SELECT a.date, 
+		        s.name, 
+                s.last_name, 
+                a.attendance_value,
+                a.date
+        FROM attendance a 
+        JOIN student s ON a.student_id = s.id
+        JOIN course c ON s.course_id = c.id
+        WHERE c.id = ?
+        AND  a.date = ?
+        ORDER BY a.attendance_value`;
+        const students = await pool.query(query, [id, date]);
+        res.json(students);
     }
 
     public async create (req: Request, res: Response): Promise <void>{

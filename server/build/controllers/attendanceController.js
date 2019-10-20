@@ -16,7 +16,27 @@ const database_1 = __importDefault(require("../database"));
 class AttendanceController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const attendance = yield database_1.default.query('SELECT * FROM attendance');
+            const attendance = yield database_1.default.query("SELECT * FROM attendance WHERE status = 'active'");
+            res.json(attendance);
+        });
+    }
+    listByDate(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const query = `SELECT a.date, 
+                            COUNT(a.student_id) AS 'Total',
+                            COUNT(CASE WHEN a.attendance_value = 'Yes' THEN 1 END) AS 'Yes',
+                            c.id,
+                            c.name,
+                            c.level,
+                            a.lesson
+                        FROM attendance a
+                        JOIN student s ON s.id = a.student_id
+                        JOIN course c ON C.id = s.course_id
+                        WHERE a.status = 'active'
+                        AND c.id = ?
+                        GROUP BY a.date`;
+            const attendance = yield database_1.default.query(query, [id]);
             res.json(attendance);
         });
     }
@@ -39,7 +59,7 @@ class AttendanceController {
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            yield database_1.default.query('DELETE FROM attendance WHERE id = ?', [id]);
+            yield database_1.default.query('UPDATE course SET status = ? WHERE id = ?', [req.body, id]);
             res.json({ text: 'Record ' + id + ' was deleted successfully' });
         });
     }
@@ -47,6 +67,13 @@ class AttendanceController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             yield database_1.default.query('UPDATE attendance SET ? WHERE id = ?', [req.body, id]);
+            res.json({ text: 'Record ' + id + ' was updated successfully' });
+        });
+    }
+    updateAttendanceValue(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            yield database_1.default.query('UPDATE attendance SET attendance_value ? WHERE id = ?', [req.body, id]);
             res.json({ text: 'Record ' + id + ' was updated successfully' });
         });
     }

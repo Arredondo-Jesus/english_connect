@@ -16,7 +16,7 @@ const database_1 = __importDefault(require("../database"));
 class StudentController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const students = yield database_1.default.query('SELECT * FROM student');
+            const students = yield database_1.default.query("SELECT * FROM student s WHERE s.status = 'active'");
             res.json(students);
         });
     }
@@ -28,6 +28,25 @@ class StudentController {
                 return res.json(course[0]);
             }
             res.status(404).json(res.json({ text: 'Student was not found' }));
+        });
+    }
+    getByCourse(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const { date } = req.params;
+            const query = `SELECT a.date, 
+		        s.name, 
+                s.last_name, 
+                a.attendance_value,
+                a.date
+        FROM attendance a 
+        JOIN student s ON a.student_id = s.id
+        JOIN course c ON s.course_id = c.id
+        WHERE c.id = ?
+        AND  a.date = ?
+        ORDER BY a.attendance_value`;
+            const students = yield database_1.default.query(query, [id, date]);
+            res.json(students);
         });
     }
     create(req, res) {

@@ -4,7 +4,26 @@ import pool from '../database';
 class AttendanceController {
 
     public async list (req: Request, res: Response){
-        const attendance = await pool.query('SELECT * FROM attendance');
+        const attendance = await pool.query("SELECT * FROM attendance WHERE status = 'active'");
+        res.json(attendance);
+    }
+
+    public async listByDate (req: Request, res: Response){
+        const { id } = req.params;
+        const query = `SELECT a.date, 
+                            COUNT(a.student_id) AS 'Total',
+                            COUNT(CASE WHEN a.attendance_value = 'Yes' THEN 1 END) AS 'Yes',
+                            c.id,
+                            c.name,
+                            c.level,
+                            a.lesson
+                        FROM attendance a
+                        JOIN student s ON s.id = a.student_id
+                        JOIN course c ON C.id = s.course_id
+                        WHERE a.status = 'active'
+                        AND c.id = ?
+                        GROUP BY a.date`;
+        const attendance = await pool.query(query, [id]);
         res.json(attendance);
     }
 
@@ -26,7 +45,7 @@ class AttendanceController {
 
     public async delete (req: Request, res: Response): Promise<void>{
         const { id } = req.params;
-        await pool.query('DELETE FROM attendance WHERE id = ?', [id]);
+        await pool.query('UPDATE course SET status = ? WHERE id = ?', [req.body, id]);
         res.json({text: 'Record ' + id + ' was deleted successfully'});
     }
 
@@ -35,6 +54,15 @@ class AttendanceController {
         await pool.query('UPDATE attendance SET ? WHERE id = ?', [req.body, id]);
         res.json({text: 'Record ' + id + ' was updated successfully'});
     }
+
+    public async updateAttendanceValue (req: Request, res: Response){
+        const { id } = req.params;
+        await pool.query('UPDATE attendance SET attendance_value ? WHERE id = ?', [req.body, id]);
+        res.json({text: 'Record ' + id + ' was updated successfully'});
+    }
+
+
+
 }
 
 export const attendanceController = new AttendanceController();

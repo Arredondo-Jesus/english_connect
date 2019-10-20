@@ -16,8 +16,12 @@ export class StudentsService {
     return this.http.get(`${this.API_URI}/students`);
   }
 
-  getStudent(id: string) {
+  getStudent(id: string | number) {
     return this.http.get(`${this.API_URI}/students/${id}`);
+  }
+
+  getStudentsByGroup(id: string | number, date: Date | string) {
+    return this.http.get(`${this.API_URI}/students/group/${id}/${date}`);
   }
 
   saveStudent(student: Student) {

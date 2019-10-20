@@ -38,7 +38,7 @@ export class InstructorListComponent implements OnInit {
     this.instructorsService.deleteInstructor(this.intructor.id, this.intructor).subscribe(
       res => {
         console.log(res);
-        this.router.navigate(['instructors']);
+        this.getIntructors();
       },
       err => console.log(err)
     );

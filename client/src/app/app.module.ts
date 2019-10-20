@@ -20,6 +20,7 @@ import { CoursesService} from './services/courses.service';
 import { AttendanceService } from './services/attendance.service';
 import { InstructorsService } from './services/instructors.service';
 import { StudentsService } from './services/students.service';
+import { StudentListGroupComponent } from './components/student-list-group/student-list-group.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { StudentsService } from './services/students.service';
     LoginFormComponent,
     CourseListComponent,
     StudentListComponent,
-    InstructorListComponent
+    InstructorListComponent,
+    StudentListGroupComponent
   ],
   imports: [
     BrowserModule,

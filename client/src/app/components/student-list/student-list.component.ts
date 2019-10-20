@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { StudentsService } from '../../services/students.service';
 import { Student } from 'src/app/models/Student';
+import { Course } from 'src/app/models/Course';
 
 @Component({
   selector: 'app-student-list',
@@ -18,10 +19,14 @@ export class StudentListComponent implements OnInit {
     status: 'inactive'
   };
 
-  constructor(private studentsService: StudentsService, private router: Router) { }
+  course: Course = {
+    id: 0
+  };
+
+  constructor(private studentsService: StudentsService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getStudents();
+      this.getStudents();
   }
 
   getStudents() {
@@ -38,7 +43,7 @@ export class StudentListComponent implements OnInit {
     this.studentsService.deleteStudent(this.student.id, this.student).subscribe(
       res => {
         console.log(res);
-        this.router.navigate(['students']);
+        this.getStudents();
       },
       err => console.log(err)
     );
