@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 import { Attendance } from '../../models/Attendance';
 import { AttendanceService } from '../../services/attendance.service';
@@ -8,11 +9,14 @@ import { Course } from 'src/app/models/Course';
 @Component({
   selector: 'app-attendance-list',
   templateUrl: './attendance-list.component.html',
-  styleUrls: ['./attendance-list.component.css']
+  styleUrls: ['./attendance-list.component.css'],
+  providers: [DatePipe]
 })
 export class AttendanceListComponent implements OnInit {
 
+  today: any = new Date();
   attendanceList: any = [];
+  options: any = [{option: '1'}];
 
   attendance: Attendance = {
     id: 0,
@@ -24,14 +28,25 @@ export class AttendanceListComponent implements OnInit {
     id: 0
   };
 
-
-  constructor(private attendanceService: AttendanceService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private attendanceService: AttendanceService, private router: Router, private activatedRoute: ActivatedRoute,
+              private datePipe: DatePipe) {
+    this.today = this.datePipe.transform(this.today, 'yyyy-MM-dd');
+  }
 
   ngOnInit() {
     const params = this.activatedRoute.snapshot.params;
     this.course.id = params.id;
     this.attendance.date = params.date;
+    this.getOptions();
     this.getAttendanceByDate();
+  }
+
+  getOptions() {
+    for (let i = 0; i < 25; i++) {
+      let value: any;
+      value = i + 1;
+      this.options[i] = {option: value.toString()};
+    }
   }
 
   getAttendance() {

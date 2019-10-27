@@ -20,6 +20,10 @@ export class AttendanceService {
     return this.http.get(`${this.API_URI}/attendance/group/${id}`);
   }
 
+  getGroup(id: string | number) {
+    return this.http.get(`${this.API_URI}/attendance/register/${id}`);
+  }
+
   getOneAttendance(id: string) {
     return this.http.get(`${this.API_URI}/attendance/${id}`);
   }

@@ -8,6 +8,16 @@ class AttendanceController {
         res.json(attendance);
     }
 
+    public async getGroup (req: Request, res: Response): Promise<any>{
+        const { id } = req.params;
+        const attendance = await pool.query(`SELECT s.id,
+                                                    s.name, 
+                                                    s.last_name
+                                            FROM student s
+                                            WHERE course_id = ?`, [id]);
+        res.json(attendance)
+    }
+
     public async listByDate (req: Request, res: Response){
         const { id } = req.params;
         const query = `SELECT a.date, 

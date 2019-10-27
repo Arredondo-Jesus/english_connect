@@ -20,6 +20,17 @@ class AttendanceController {
             res.json(attendance);
         });
     }
+    getGroup(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const attendance = yield database_1.default.query(`SELECT s.id,
+                                                    s.name, 
+                                                    s.last_name
+                                            FROM student s
+                                            WHERE course_id = ?`, [id]);
+            res.json(attendance);
+        });
+    }
     listByDate(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;

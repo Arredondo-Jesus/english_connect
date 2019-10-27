@@ -1,41 +1,14 @@
 <h3>Attendance By Date</h3>
 <div class="row">
-    <div class="col p-0">
-        <input type="date" name="date">
+  <div class="col p-0">
+    <div class="card">
+      <div class="card-body col-md-12">
+          <div class="col col-md-4 p-0 offset-8">
+              <button [routerLink]="['/attendance/register', course.id]" class="btn btn-warning btn-block">Register Attendance</button>
+          </div>
+      </div>
     </div>
-    <div class="col p-0">
-        <select name="lesson">
-          <option value="" default disabled>-- Select Lession --</option>
-          <option value="">1</option>
-          <option value="">2</option>
-          <option value="">3</option>
-          <option value="">4</option>
-          <option value="">5</option>
-          <option value="">6</option>
-          <option value="">7</option>
-          <option value="">8</option>
-          <option value="">9</option>
-          <option value="">10</option>
-          <option value="">11</option>
-          <option value="">12</option>
-          <option value="">13</option>
-          <option value="">14</option>
-          <option value="">15</option>
-          <option value="">16</option>
-          <option value="">17</option>
-          <option value="">18</option>
-          <option value="">19</option>
-          <option value="">20</option>
-          <option value="">21</option>
-          <option value="">22</option>
-          <option value="">23</option>
-          <option value="">24</option>
-          <option value="">25</option>
-        </select>
-    </div>
-    <div class="col col-md-2 p-0">
-        <button class="btn btn-warning btn-block">Register Attendance</button>
-    </div>
+  </div>
 </div>
 <div class="row bg-success p-1">
   <div class="col text-white text-center">Date</div>
@@ -45,7 +18,7 @@
   <div class="col text-white text-center">Delete</div>
 </div>
 <div class="row p-1 border border-secondary" *ngFor="let attendance of attendanceList">
-  <div class="col text-center">{{attendance.date | date : "yy/MM/dd"}}</div>
+  <div class="col text-center">{{attendance.date | date : "MM/dd/yyyy"}}</div>
   <div class="col text-center"><a [routerLink]="['/student/group', course.id, attendance.date | date: 'yyyy-MM-dd']">{{attendance.Yes}} / {{attendance.Total}}</a></div>
   <div class="col text-center">{{attendance.lesson}}</div>
   <div [routerLink]="['/attendance/edit', attendance.id]" class="col text-center"><button class="btn btn-link p-0">Edit</button></div>
