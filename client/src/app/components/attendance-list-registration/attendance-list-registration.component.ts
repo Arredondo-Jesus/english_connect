@@ -20,7 +20,10 @@ export class AttendanceListRegistrationComponent implements OnInit {
   options: any = [{option: '1'}];
   values: any = [{value: 'Yes'}, {value: 'No'}];
 
-  attendance: Attendance = {
+  attendanceValues: any = [];
+  attendanceList: any = [];
+
+  attendance: Attendance  = {
     id: 0,
     date: new Date(),
     attendance_value: '',
@@ -80,11 +83,27 @@ export class AttendanceListRegistrationComponent implements OnInit {
     this.attendanceService.saveAttendance(this.attendance)
       .subscribe(
         res => {
-          console.log(this.attendance);
           this.getGroup();
+          this.getAttendanceAll();
+          console.log(this.attendanceValues);
+          console.log(this.attendanceList);
         },
          err => console.log(err)
       );
-
   }
+
+  getAttendanceAll() {
+
+    for (let i = 0; i < this.attendanceValues.length; i++) {
+
+      const newAttendance: Attendance = {};
+      newAttendance.date = this.attendance.date;
+      newAttendance.lesson = this.attendance.lesson;
+      newAttendance.student_id = this.studentList[i].id;
+      newAttendance.attendance_value = this.attendanceValues[i];
+      this.attendanceList[i] = newAttendance;
+
+    }
+  }
+
 }
