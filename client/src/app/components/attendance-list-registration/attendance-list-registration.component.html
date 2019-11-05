@@ -25,7 +25,7 @@
               <div class="col text-center">{{i + 1}} {{student.name}} {{student.last_name}}</div>
               <div class="col text-center">
                 <select name="attendanceOptions[{{i}}]" [(ngModel)]="attendanceValues[i]">
-                  <option *ngFor="let value of values" [ngValue]="value.value">{{value.value}}</option>
+                  <option *ngFor="let value of values" [ngValue]="value.value" [selected]="value.value === 'Yes'">{{value.value}}</option>
                 </select>
               </div>
             </div>
