@@ -80,16 +80,19 @@ export class AttendanceListRegistrationComponent implements OnInit {
     delete this.attendance.id;
     delete this.attendance.status;
 
-    this.attendanceService.saveAttendance(this.attendance)
+    this.getAttendanceAll();
+
+    for (const attendance of this.attendanceList) {
+      this.attendanceService.saveAttendance(attendance)
       .subscribe(
         res => {
           this.getGroup();
-          this.getAttendanceAll();
-          console.log(this.attendanceValues);
-          console.log(this.attendanceList);
+          this.router.navigate(['attendance/group/', this.course.id]);
+          console.log(attendance);
         },
          err => console.log(err)
       );
+    }
   }
 
   getAttendanceAll() {
@@ -98,9 +101,9 @@ export class AttendanceListRegistrationComponent implements OnInit {
 
       const newAttendance: Attendance = {};
       newAttendance.date = this.attendance.date;
+      newAttendance.attendance_value = this.attendanceValues[i];
       newAttendance.lesson = this.attendance.lesson;
       newAttendance.student_id = this.studentList[i].id;
-      newAttendance.attendance_value = this.attendanceValues[i];
       this.attendanceList[i] = newAttendance;
 
     }

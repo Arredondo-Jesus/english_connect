@@ -1,18 +1,20 @@
 <h3>Register attendance</h3>
 <div class="row">
-    <div class="card col-md-12 p-2">
-      <div class="card-body p-2">
+    <div class="col-md-12 p-2">
+      <div class="p-2">
         <form>
-            <div class="col col-md-4">
-                <input type="date" name="date" value="{{today}}">
-            </div>
-            <div class="col col-md-4">
-                <select [(ngModel)]="attendance.lesson" name="attendance">
-                  <option *ngFor="let option of options" [ngValue]="option.option">{{option.option}}</option>
-                </select>
-            </div>
-            <div class="col col-md-4 p-0">
-                <button class="btn btn-warning btn-block" (click)="saveNewAttendanceList()">Save</button>
+            <div class="row">
+              <div class="col col-md-4">
+                <input type="date" name="date" value="{{today}}"  [(ngModel)]="attendance.date" >
+              </div>
+              <div class="col col-md-4">
+                  <select [(ngModel)]="attendance.lesson" name="attendance">
+                    <option *ngFor="let option of options" [ngValue]="option.option">{{option.option}}</option>
+                  </select>
+              </div>
+              <div class="col col-md-4 p-1">
+                  <button class="btn btn-warning btn-block" (click)="saveNewAttendanceList()">Save</button>
+              </div>
             </div>
 
             <div class="row bg-info p-1">
@@ -20,7 +22,7 @@
               <div class="col text-white text-center">Value</div>
             </div>
             <div class="row p-1 border border-secondary" *ngFor="let student of studentList let i = index">
-              <div class="col text-center">{{student.id}} {{student.name}} {{student.last_name}}</div>
+              <div class="col text-center">{{i + 1}} {{student.name}} {{student.last_name}}</div>
               <div class="col text-center">
                 <select name="attendanceOptions[{{i}}]" [(ngModel)]="attendanceValues[i]">
                   <option *ngFor="let value of values" [ngValue]="value.value">{{value.value}}</option>
