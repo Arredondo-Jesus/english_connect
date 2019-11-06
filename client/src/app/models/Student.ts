@@ -8,4 +8,5 @@ export interface Student {
   created_at?: Date;
   modified_on?: Date;
   status?: string;
+  course_id?: number;
 }

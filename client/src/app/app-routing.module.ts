@@ -63,11 +63,11 @@ const routes: Routes = [
     component: StudentListComponent
   },
   {
-    path: 'student/add',
+    path: 'student/add/:cid',
     component: StudentFormComponent
   },
   {
-    path: 'student/edit/:id',
+    path: 'student/edit/:sid',
     component: StudentFormComponent
   },
   {

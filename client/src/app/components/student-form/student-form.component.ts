@@ -23,7 +23,8 @@ export class StudentFormComponent implements OnInit {
     email: '',
     phone: '',
     created_at: new Date(),
-    status: ''
+    status: '',
+    course_id: 0
   };
 
   edit = false;
@@ -36,8 +37,8 @@ export class StudentFormComponent implements OnInit {
 
   getStudent() {
     const params = this.activatedRoute.snapshot.params;
-    if (params.id) {
-      this.studentsService.getStudent(params.id)
+    if (params.sid) {
+      this.studentsService.getStudent(params.sid)
         .subscribe(
           res => {
             console.log(res);
@@ -53,11 +54,12 @@ export class StudentFormComponent implements OnInit {
     delete this.student.created_at;
     delete this.student.id;
     delete this.student.status;
+    this.student.course_id = this.activatedRoute.snapshot.params.cid;
 
-    this.studentsService.saveStudent(this.student)
+    this.studentsService.saveStudent(this.student.course_id, this.student)
       .subscribe(
         res => {
-          console.log(this.student);
+          console.log(this.activatedRoute.snapshot.params.cid);
           this.router.navigate(['students']);
         },
          err => console.log(err)
