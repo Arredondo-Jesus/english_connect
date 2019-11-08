@@ -52,10 +52,6 @@ export class StudentListGroupComponent implements OnInit {
     );
   }
 
-  saveNewAttendance() {
-
-  }
-
   updateAttendance(id: string) {
     this.attendaceService.updateAttendance(id, this.attendance).subscribe(
       res => {

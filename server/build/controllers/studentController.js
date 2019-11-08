@@ -23,7 +23,7 @@ class StudentController {
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const course = yield database_1.default.query('SELECT * FROM student WHERE id = ?', [id]);
+            const course = yield database_1.default.query(`SELECT * FROM student WHERE status = 'active' AND id = ?`, [id]);
             if (course.length > 0) {
                 return res.json(course[0]);
             }
@@ -34,8 +34,8 @@ class StudentController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             const { date } = req.params;
-            const query = `SELECT a.date, 
-		        s.name, 
+            const query = `SELECT a.date,
+                s.name, 
                 s.last_name, 
                 a.attendance_value,
                 a.date
@@ -44,6 +44,7 @@ class StudentController {
         JOIN course c ON s.course_id = c.id
         WHERE c.id = ?
         AND  a.date = ?
+        AND a.status = 'active'
         ORDER BY a.attendance_value`;
             const students = yield database_1.default.query(query, [id, date]);
             res.json(students);

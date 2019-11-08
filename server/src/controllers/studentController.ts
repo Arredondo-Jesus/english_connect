@@ -10,7 +10,7 @@ class StudentController {
 
     public async getOne (req: Request, res: Response): Promise<any>{
         const { id } = req.params;
-        const course = await pool.query('SELECT * FROM student WHERE id = ?', [id]);
+        const course = await pool.query(`SELECT * FROM student WHERE status = 'active' AND id = ?`, [id]);
 
         if (course.length > 0){
             return res.json(course[0]);
@@ -23,8 +23,8 @@ class StudentController {
         const { id } = req.params;
         const { date } = req.params;
 
-        const query = `SELECT a.date, 
-		        s.name, 
+        const query = `SELECT a.date,
+                s.name, 
                 s.last_name, 
                 a.attendance_value,
                 a.date
@@ -33,6 +33,7 @@ class StudentController {
         JOIN course c ON s.course_id = c.id
         WHERE c.id = ?
         AND  a.date = ?
+        AND a.status = 'active'
         ORDER BY a.attendance_value`;
         const students = await pool.query(query, [id, date]);
         res.json(students);

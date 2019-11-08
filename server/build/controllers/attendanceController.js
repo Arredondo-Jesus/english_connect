@@ -25,9 +25,11 @@ class AttendanceController {
             const { id } = req.params;
             const attendance = yield database_1.default.query(`SELECT s.id,
                                                     s.name, 
-                                                    s.last_name
+                                                    s.last_name,
+                                                    s.status
                                             FROM student s
-                                            WHERE course_id = ?`, [id]);
+                                            WHERE s.status = 'active'
+                                            AND course_id = ?`, [id]);
             res.json(attendance);
         });
     }

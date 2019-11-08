@@ -75,7 +75,7 @@ const routes: Routes = [
     component: StudentListComponent
   },
   {
-    path: 'student/group/:id/:date',
+    path: 'students/group/:id/:date',
     component: StudentListGroupComponent
   },
   {

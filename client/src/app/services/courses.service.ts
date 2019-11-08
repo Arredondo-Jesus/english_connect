@@ -20,6 +20,10 @@ export class CoursesService {
     return this.http.get(`${this.API_URI}/courses/${id}`);
   }
 
+  getStudentsByGroupId(id: string | number) {
+    return this.http.get(`${this.API_URI}/courses/course/${id}`);
+  }
+
   saveCourse(course: Course) {
     return this.http.post(`${this.API_URI}/courses`, course);
   }

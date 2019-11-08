@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { CoursesService } from '../../services/courses.service';
+import { StudentsService } from '../../services/students.service';
 import { Course } from 'src/app/models/Course';
 
 @Component({
@@ -15,10 +16,11 @@ export class CourseListComponent implements OnInit {
 
   course: Course = {
     id: 0,
-    status: 'inactive'
+    status: 'inactive',
+    count: 0
   };
 
-  constructor(private coursesService: CoursesService, private router: Router) { }
+  constructor(private coursesService: CoursesService, private studentService: StudentsService, router: Router) { }
 
   ngOnInit() {
     this.getCourses();

@@ -10,4 +10,5 @@ export interface Course {
   modified_on?: Date;
   instructor_id?: number;
   status?: string;
+  count?: number;
 }
