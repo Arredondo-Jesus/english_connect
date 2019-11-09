@@ -58,7 +58,7 @@ export class StudentListComponent implements OnInit {
     this.studentsService.deleteStudent(this.student.id, this.student).subscribe(
       res => {
         console.log(res);
-        this.getStudents();
+        this.getStudentByGroup();
       },
       err => console.log(err)
     );

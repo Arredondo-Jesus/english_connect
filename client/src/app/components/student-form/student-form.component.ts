@@ -60,7 +60,7 @@ export class StudentFormComponent implements OnInit {
       .subscribe(
         res => {
           console.log(this.activatedRoute.snapshot.params.cid);
-          this.router.navigate(['students']);
+          this.router.navigate(['students/group/', this.student.course_id]);
         },
          err => console.log(err)
       );
