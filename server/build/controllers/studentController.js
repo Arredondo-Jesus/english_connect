@@ -50,6 +50,14 @@ class StudentController {
             res.json(students);
         });
     }
+    getByCourseDetails(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const query = `SELECT * FROM student s WHERE s.status = 'active' AND s.course_id = ?`;
+            const students = yield database_1.default.query(query, [id]);
+            res.json(students);
+        });
+    }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             yield database_1.default.query('INSERT INTO student set ?', [req.body]);

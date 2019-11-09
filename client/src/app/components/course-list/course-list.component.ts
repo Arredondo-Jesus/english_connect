@@ -36,6 +36,8 @@ export class CourseListComponent implements OnInit {
   }
 
   deleteCourse(id: number) {
+    delete this.course.count;
+
     this.course.id = id;
     this.coursesService.deleteCourse(this.course.id, this.course).subscribe(
       res => {

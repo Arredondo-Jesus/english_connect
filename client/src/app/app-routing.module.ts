@@ -79,6 +79,10 @@ const routes: Routes = [
     component: StudentListGroupComponent
   },
   {
+    path: 'students/group/:id',
+    component: StudentListComponent
+  },
+  {
     path: 'login',
     component: LoginFormComponent
   }

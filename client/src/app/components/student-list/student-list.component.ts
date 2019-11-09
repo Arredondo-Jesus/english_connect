@@ -26,11 +26,26 @@ export class StudentListComponent implements OnInit {
   constructor(private studentsService: StudentsService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    const params = this.activatedRoute.snapshot.params;
+    if (params.id) {
+      this.getStudentByGroup();
+    } else {
       this.getStudents();
+    }
   }
 
   getStudents() {
     this.studentsService.getStudents().subscribe(
+      res => {
+        this.students = res;
+      },
+      err => console.log(err)
+    );
+  }
+
+  getStudentByGroup() {
+    this.course.id = this.activatedRoute.snapshot.params.id;
+    this.studentsService.getStudentsInGroup(this.course.id).subscribe(
       res => {
         this.students = res;
       },

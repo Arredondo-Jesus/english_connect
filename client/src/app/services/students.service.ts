@@ -24,6 +24,10 @@ export class StudentsService {
     return this.http.get(`${this.API_URI}/students/group/${id}/${date}`);
   }
 
+  getStudentsInGroup(id: string | number) {
+    return this.http.get(`${this.API_URI}/students/group/${id}`);
+  }
+
   saveStudent(id: string | number, student: Student) {
     return this.http.post(`${this.API_URI}/students/add/${id}`, student);
   }

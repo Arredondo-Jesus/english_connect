@@ -15,7 +15,7 @@
   <div class="col text-center">{{course.day}}</div>
   <div class="col text-center">{{course.time}}</div>
   <div class="col text-center">{{course.building}}</div>
-  <div [routerLink]="['/attendance/group', course.id]" class="col text-center"><button class="btn btn-link p-0">{{course.count}}</button></div>
+  <div [routerLink]="['/students/group', course.id]" class="col text-center"><button class="btn btn-link p-0">{{course.count}}</button></div>
   <div [routerLink]="['/attendance/group', course.id]" class="col text-center"><button class="btn btn-link p-0">Attendance</button></div>
   <div [routerLink]="['/student/add', course.id]" class="col text-center"><button class="btn btn-link p-0">Enroll</button></div>
   <div [routerLink]="['/course/edit', course.id]" class="col text-center"><button class="btn btn-link p-0">Edit</button></div>

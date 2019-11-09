@@ -39,6 +39,14 @@ class StudentController {
         res.json(students);
     }
 
+    public async getByCourseDetails (req: Request, res: Response): Promise <void>{
+        const { id } = req.params;
+
+        const query = `SELECT * FROM student s WHERE s.status = 'active' AND s.course_id = ?`;
+        const students = await pool.query(query, [id]);
+        res.json(students);
+    }
+
     public async create (req: Request, res: Response): Promise <void>{
         await pool.query('INSERT INTO student set ?', [req.body]);
         res.json({message: 'Student saved'});
