@@ -10,7 +10,9 @@ class AttendanceRoutes {
 
     config(): void {
         this.router.get('/group/:id', attendanceController.listByDate);
-        this.router.get('/register/:id', attendanceController.getGroup)
+        this.router.get('/register/:id', attendanceController.getGroup);
+        this.router.get('/edit/:id/:date', attendanceController.getAttendanceByGroup);
+        this.router.put('/edit/:id/:date', attendanceController.update);
         this.router.get('/:id', attendanceController.getOne)
         this.router.post('/', attendanceController.create);
         this.router.delete('/:id', attendanceController.delete);

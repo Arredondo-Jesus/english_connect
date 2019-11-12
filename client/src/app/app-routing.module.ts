@@ -27,6 +27,10 @@ const routes: Routes = [
     component: AttendanceListRegistrationComponent
   },
   {
+    path: 'attendance/edit/:id/:date',
+    component: AttendanceListRegistrationComponent
+  },
+  {
     path: 'courses',
     component: CourseListComponent
   },

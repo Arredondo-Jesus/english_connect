@@ -44,6 +44,8 @@ export class AttendanceListRegistrationComponent implements OnInit {
     status: ''
   };
 
+  edit = false;
+
   constructor(private attendanceService: AttendanceService, private router: Router, private activatedRoute: ActivatedRoute,
               private datePipe: DatePipe) {
               this.today = this.datePipe.transform(this.today, 'yyyy-MM-dd');
@@ -52,24 +54,70 @@ export class AttendanceListRegistrationComponent implements OnInit {
   ngOnInit() {
     this.getGroup();
     this.getOptions();
+    this.attendance.date = this.today;
   }
 
   getOptions() {
-    for (let i = 0; i < 25; i++) {
+    for (let i = 1; i < 25; i++) {
       let value: any;
       value = i + 1;
-      this.options[i] = {option: value.toString()};
+      this.options.push({option: value.toString()});
     }
   }
 
   getGroup() {
     const params = this.activatedRoute.snapshot.params;
     this.course.id = params.id;
+    this.attendance.date = params.date;
 
-    this.attendanceService.getGroup(this.course.id).subscribe(
+    if (params.date) {
+      this.edit = true;
+    } else {
+      this. edit = false;
+    }
+
+    if (this.edit === false) {
+      this.attendanceService.getGroup(this.course.id).subscribe(
+        res => {
+          console.log(this.attendanceValues);
+          this.studentList = res;
+          for (const student of this.studentList) {
+            this.attendanceValues.push('Yes');
+          }
+        },
+        err => console.log(err)
+      );
+    } else if (this.edit === true) {
+      this.attendanceService.getAttendanceByGroup(this.course.id, this.attendance.date).subscribe(
+        res => {
+          console.log(res);
+          this.studentList = res;
+          for (const student of this.studentList) {
+            this.attendanceValues.push(student.attendance_value);
+          }
+        },
+        err => console.log(err)
+      );
+    }
+  }
+
+  getAttendanceByDate() {
+    this.attendanceService.geAttendanceByDate(this.course.id).subscribe(
+      res => {
+        this.attendanceList = res;
+        console.log(res);
+      },
+      err => console.log(err)
+    );
+  }
+
+  updateAttendance(id: string) {
+    this.attendance.date = this.activatedRoute.snapshot.params.date;
+    this.attendanceService.updateAttendance(id, this.attendance.date, this.attendance).subscribe(
       res => {
         console.log(res);
-        this.studentList = res;
+        this.getAttendanceByDate();
+        this.edit = true;
       },
       err => console.log(err)
     );
@@ -102,7 +150,7 @@ export class AttendanceListRegistrationComponent implements OnInit {
       const newAttendance: Attendance = {};
       newAttendance.date = this.attendance.date;
       newAttendance.attendance_value = this.attendanceValues[i];
-      newAttendance.lesson = this.attendance.lesson;
+      newAttendance.lesson = this.attendance.lesson + 1;
       newAttendance.student_id = this.studentList[i].id;
       this.attendanceList[i] = newAttendance;
 

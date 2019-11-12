@@ -5,11 +5,11 @@
         <form>
             <div class="row">
               <div class="col col-md-4">
-                <input type="date" name="date" value="{{today}}"  [(ngModel)]="attendance.date">
+                <input type="date" name="date"  [(ngModel)]="attendance.date">
               </div>
               <div class="col col-md-4">
                   <select [(ngModel)]="attendance.lesson" name="attendance">
-                    <option *ngFor="let option of options" [ngValue]="option.option">{{option.option}}</option>
+                    <option *ngFor="let option of options let i = index" [ngValue]="i">{{i+1}}</option>
                   </select>
               </div>
               <div class="col col-md-4 p-1">
@@ -25,7 +25,8 @@
               <div class="col text-center">{{i + 1}} {{student.name}} {{student.last_name}}</div>
               <div class="col text-center">
                 <select name="attendanceOptions[{{i}}]" [(ngModel)]="attendanceValues[i]">
-                  <option *ngFor="let value of values" [ngValue]="value.value" [selected]="value.value === 'Yes'">{{value.value}}</option>
+                  <option  [ngValue] = "values[0].value">Yes</option>
+                  <option  [ngValue] = "values[1].value">No</option>
                 </select>
               </div>
             </div>

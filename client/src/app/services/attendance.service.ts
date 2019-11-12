@@ -20,6 +20,10 @@ export class AttendanceService {
     return this.http.get(`${this.API_URI}/attendance/group/${id}`);
   }
 
+  getAttendanceByGroup(id: string | number, date: Date) {
+    return this.http.get(`${this.API_URI}/attendance/edit/${id}/${date}`);
+  }
+
   getGroup(id: string | number) {
     return this.http.get(`${this.API_URI}/attendance/register/${id}`);
   }
@@ -32,11 +36,15 @@ export class AttendanceService {
     return this.http.post(`${this.API_URI}/attendance`, attendance);
   }
 
+  editAttendance(id: string | number, updateAttendance: Attendance) {
+    return this.http.put(`${this.API_URI}/attendance/edit/${id}`, updateAttendance);
+  }
+
   deleteAttendance(id: string | number, updatedStatus: Attendance) {
     return this.http.put(`${this.API_URI}/attendance/delete/${id}`, updatedStatus);
   }
 
-  updateAttendance(id: string | number, updatedAttendance: Attendance) {
-    return this.http.put(`${this.API_URI}/attendance/${id}`, updatedAttendance);
+  updateAttendance(id: string | number, date: Date, updatedAttendance: Attendance) {
+    return this.http.put(`${this.API_URI}/attendance/edit/${id}/${date}`, updatedAttendance);
   }
 }

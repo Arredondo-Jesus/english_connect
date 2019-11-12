@@ -20,6 +20,23 @@ class AttendanceController {
             res.json(attendance);
         });
     }
+    getAttendanceByGroup(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const { date } = req.params;
+            const attendance = yield database_1.default.query(`SELECT a.attendance_value,
+                                             a.lesson,
+                                             a.date,
+                                             s.name,
+                                             s.last_name 
+                                             FROM attendance a
+                                             JOIN student s ON a.student_id = s.id
+                                             WHERE a.date = ?
+                                             AND s.course_id = ?
+                                             AND a.status = 'active'`, [date, id]);
+            res.json(attendance);
+        });
+    }
     getGroup(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
@@ -79,14 +96,15 @@ class AttendanceController {
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            yield database_1.default.query('UPDATE attendance SET ? WHERE id = ?', [req.body, id]);
+            yield database_1.default.query('UPDATE attendance SET ? WHERE student_id = ?', [req.body, id]);
             res.json({ text: 'Record ' + id + ' was updated successfully' });
         });
     }
     updateAttendanceValue(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
-            yield database_1.default.query('UPDATE attendance SET attendance_value ? WHERE id = ?', [req.body, id]);
+            const id = req.param('id');
+            const date = req.param('date');
+            yield database_1.default.query('UPDATE attendance SET attendance_value ? WHERE student_id = ? AND date = ?', [req.body, id, date]);
             res.json({ text: 'Record ' + id + ' was updated successfully' });
         });
     }

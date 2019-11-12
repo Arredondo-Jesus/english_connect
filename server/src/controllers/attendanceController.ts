@@ -8,6 +8,22 @@ class AttendanceController {
         res.json(attendance);
     }
 
+    public async getAttendanceByGroup (req: Request, res: Response){
+        const { id } = req.params;
+        const { date } = req.params;
+        const attendance = await pool.query(`SELECT a.attendance_value,
+                                             a.lesson,
+                                             a.date,
+                                             s.name,
+                                             s.last_name 
+                                             FROM attendance a
+                                             JOIN student s ON a.student_id = s.id
+                                             WHERE a.date = ?
+                                             AND s.course_id = ?
+                                             AND a.status = 'active'`, [date, id]);
+        res.json(attendance);
+    }
+
     public async getGroup (req: Request, res: Response): Promise<any>{
         const { id } = req.params;
         const attendance = await pool.query(`SELECT s.id,
@@ -63,13 +79,14 @@ class AttendanceController {
 
     public async update (req: Request, res: Response){
         const { id } = req.params;
-        await pool.query('UPDATE attendance SET ? WHERE id = ?', [req.body, id]);
+        await pool.query('UPDATE attendance SET ? WHERE student_id = ?', [req.body, id]);
         res.json({text: 'Record ' + id + ' was updated successfully'});
     }
 
     public async updateAttendanceValue (req: Request, res: Response){
-        const { id } = req.params;
-        await pool.query('UPDATE attendance SET attendance_value ? WHERE id = ?', [req.body, id]);
+        const id  = req.param('id');
+        const  date  = req.param('date');
+        await pool.query('UPDATE attendance SET attendance_value ? WHERE student_id = ? AND date = ?', [req.body, id, date]);
         res.json({text: 'Record ' + id + ' was updated successfully'});
     }
 
