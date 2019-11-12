@@ -9,7 +9,7 @@
               </div>
               <div class="col col-md-4">
                   <select [(ngModel)]="attendance.lesson" name="attendance">
-                    <option *ngFor="let option of options let i = index" [ngValue]="i">{{i+1}}</option>
+                    <option *ngFor="let option of options let i = index" [ngValue]="attendance.lesson">{{i+1}}</option>
                   </select>
               </div>
               <div class="col col-md-4 p-1">
