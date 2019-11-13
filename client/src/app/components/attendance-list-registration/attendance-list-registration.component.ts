@@ -94,6 +94,7 @@ export class AttendanceListRegistrationComponent implements OnInit {
           this.studentList = res;
           this.today = this.datePipe.transform(this.studentList[0].date, 'yyyy-MM-dd');
           this.attendance.date = this.today;
+          this.attendance.lesson = this.studentList[0].lesson;
           for (const student of this.studentList) {
             this.attendanceValues.push(student.attendance_value);
           }
