@@ -30,6 +30,7 @@ export class CourseListComponent implements OnInit {
     this.coursesService.getCourses().subscribe(
       res => {
         this.courses = res;
+        console.log(res);
       },
       err => console.log(err)
     );

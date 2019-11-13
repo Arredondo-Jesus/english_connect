@@ -15,7 +15,7 @@ class CourseController {
                                           c.building,
                                           c.status
                                         FROM course c
-                                        JOIN student S ON s.course_id = c.id
+                                        JOIN student s ON s.course_id = c.id
                                         WHERE c.status = 'active'
                                         AND s.status = 'active'
                                         AND s.course_id = c.id
