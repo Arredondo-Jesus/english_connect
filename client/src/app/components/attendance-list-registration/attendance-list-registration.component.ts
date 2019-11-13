@@ -81,6 +81,7 @@ export class AttendanceListRegistrationComponent implements OnInit {
         res => {
           console.log(this.attendanceValues);
           this.studentList = res;
+          this.attendance.lesson = 1;
           for (const student of this.studentList) {
             this.attendanceValues.push('Yes');
           }
