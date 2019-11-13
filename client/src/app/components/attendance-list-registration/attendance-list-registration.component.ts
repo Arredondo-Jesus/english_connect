@@ -153,7 +153,7 @@ export class AttendanceListRegistrationComponent implements OnInit {
       const newAttendance: Attendance = {};
       newAttendance.date = this.attendance.date;
       newAttendance.attendance_value = this.attendanceValues[i];
-      newAttendance.lesson = this.attendance.lesson + 1;
+      newAttendance.lesson = this.attendance.lesson;
       newAttendance.student_id = this.studentList[i].id;
       this.attendanceList[i] = newAttendance;
 
