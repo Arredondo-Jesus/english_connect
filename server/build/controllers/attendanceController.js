@@ -25,6 +25,7 @@ class AttendanceController {
             const { id } = req.params;
             const { date } = req.params;
             const attendance = yield database_1.default.query(`SELECT a.attendance_value,
+                                             s.id AS 'student_id',
                                              a.lesson,
                                              a.date,
                                              s.name,
@@ -96,16 +97,9 @@ class AttendanceController {
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            yield database_1.default.query('UPDATE attendance SET ? WHERE student_id = ?', [req.body, id]);
-            res.json({ text: 'Record ' + id + ' was updated successfully' });
-        });
-    }
-    updateAttendanceValue(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const id = req.param('id');
-            const date = req.param('date');
-            yield database_1.default.query('UPDATE attendance SET attendance_value ? WHERE student_id = ? AND date = ?', [req.body, id, date]);
-            res.json({ text: 'Record ' + id + ' was updated successfully' });
+            const { date } = req.params;
+            yield database_1.default.query('UPDATE attendance SET ? WHERE date = ? AND student_id = ?', [req.body, date, id]);
+            res.json(req.body);
         });
     }
 }

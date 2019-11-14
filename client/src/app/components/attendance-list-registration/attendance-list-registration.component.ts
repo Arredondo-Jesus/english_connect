@@ -91,8 +91,8 @@ export class AttendanceListRegistrationComponent implements OnInit {
     } else if (this.edit === true) {
       this.attendanceService.getAttendanceByGroup(this.course.id, this.attendance.date).subscribe(
         res => {
-          console.log(res);
           this.studentList = res;
+          console.log(this.studentList);
           this.today = this.datePipe.transform(this.studentList[0].date, 'yyyy-MM-dd');
           this.attendance.date = this.today;
           this.attendance.lesson = this.studentList[0].lesson;
@@ -115,16 +115,23 @@ export class AttendanceListRegistrationComponent implements OnInit {
     );
   }
 
-  updateAttendance(id: string) {
-    this.attendance.date = this.activatedRoute.snapshot.params.date;
-    this.attendanceService.updateAttendance(id, this.attendance.date, this.attendance).subscribe(
-      res => {
-        console.log(res);
-        this.getAttendanceByDate();
-        this.edit = true;
-      },
-      err => console.log(err)
-    );
+  updateAttendance() {
+    delete this.attendance.id;
+    delete this.attendance.status;
+    const id = this.activatedRoute.snapshot.params.id;
+    const date = this. activatedRoute.snapshot.params.date;
+
+    for (let i = 0; i < this.attendanceValues.length; i++) {
+      this.attendance.attendance_value = this.attendanceValues[i];
+      this.attendance.student_id = this.studentList[i].student_id;
+      this.attendanceService.updateAttendance(this.attendance.student_id, this.attendance.date, this.attendance).subscribe(
+        res => {
+          this.edit = true;
+          this.router.navigate([`students/group/`, this.course.id, this.attendance.date]);
+        },
+        err => console.log(err)
+      );
+    }
   }
 
   saveNewAttendanceList() {
@@ -157,7 +164,6 @@ export class AttendanceListRegistrationComponent implements OnInit {
       newAttendance.lesson = this.attendance.lesson;
       newAttendance.student_id = this.studentList[i].id;
       this.attendanceList[i] = newAttendance;
-
     }
   }
 
