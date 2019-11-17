@@ -16,7 +16,8 @@ class AttendanceController {
                                              a.lesson,
                                              a.date,
                                              s.name,
-                                             s.last_name 
+                                             s.last_name,
+                                             a.id
                                              FROM attendance a
                                              JOIN student s ON a.student_id = s.id
                                              WHERE a.date = ?
@@ -45,7 +46,8 @@ class AttendanceController {
                             c.id,
                             c.name,
                             c.level,
-                            a.lesson
+                            a.lesson,
+                            a.id
                         FROM attendance a
                         JOIN student s ON s.id = a.student_id
                         JOIN course c ON C.id = s.course_id
@@ -80,9 +82,8 @@ class AttendanceController {
 
     public async update (req: Request, res: Response){
         const { id } = req.params;
-        const { date } = req.params;
-        await pool.query('UPDATE attendance SET ? WHERE date = ? AND student_id = ?', [req.body, date, id]);
-        res.json(req.body);
+        await pool.query('UPDATE attendance SET ? WHERE id = ?', [req.body, id]);
+        res.json('Record ' + id + ' was updated successfully');
     }
 }
 

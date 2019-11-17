@@ -16,8 +16,8 @@ const database_1 = __importDefault(require("../database"));
 class CourseController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const courses = yield database_1.default.query(`SELECT c.id, 
-                                          COUNT(s.id) AS count,
+            const courses = yield database_1.default.query(`SELECT c.id,
+                                          SUM(IF(s.status = 'active',1,0)) AS 'count',
                                           c.name,
                                           c.level,
                                           c.time,
@@ -26,10 +26,8 @@ class CourseController {
                                           c.building,
                                           c.status
                                         FROM course c
-                                        JOIN student s ON s.course_id = c.id
+                                        LEFT OUTER JOIN student s ON s.course_id = c.id
                                         WHERE c.status = 'active'
-                                        AND s.status = 'active'
-                                        AND s.course_id = c.id
                                         GROUP BY c.id`);
             res.json(courses);
         });

@@ -44,7 +44,7 @@ export class AttendanceService {
     return this.http.put(`${this.API_URI}/attendance/delete/${id}`, updatedStatus);
   }
 
-  updateAttendance(id: string | number, date: Date, updatedAttendance: Attendance) {
-    return this.http.put(`${this.API_URI}/attendance/edit/${id}/${date}`, updatedAttendance);
+  updateAttendance(id: string | number, updatedAttendance: Attendance) {
+    return this.http.put(`${this.API_URI}/attendance/edit/${id}`, updatedAttendance);
   }
 }

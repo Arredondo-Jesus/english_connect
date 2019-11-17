@@ -54,11 +54,16 @@ export class StudentListComponent implements OnInit {
   }
 
   deleteStudent(id: number) {
+    const params = this.activatedRoute.snapshot.params;
     this.student.id = id;
     this.studentsService.deleteStudent(this.student.id, this.student).subscribe(
       res => {
         console.log(res);
-        this.getStudentByGroup();
+        if (params.id) {
+          this.getStudentByGroup();
+        } else {
+          this.getStudents();
+        }
       },
       err => console.log(err)
     );

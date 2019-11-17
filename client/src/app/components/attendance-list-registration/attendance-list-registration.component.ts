@@ -92,7 +92,7 @@ export class AttendanceListRegistrationComponent implements OnInit {
       this.attendanceService.getAttendanceByGroup(this.course.id, this.attendance.date).subscribe(
         res => {
           this.studentList = res;
-          console.log(this.studentList);
+          console.log(res);
           this.today = this.datePipe.transform(this.studentList[0].date, 'yyyy-MM-dd');
           this.attendance.date = this.today;
           this.attendance.lesson = this.studentList[0].lesson;
@@ -116,18 +116,19 @@ export class AttendanceListRegistrationComponent implements OnInit {
   }
 
   updateAttendance() {
-    delete this.attendance.id;
     delete this.attendance.status;
-    const id = this.activatedRoute.snapshot.params.id;
-    const date = this. activatedRoute.snapshot.params.date;
 
     for (let i = 0; i < this.attendanceValues.length; i++) {
       this.attendance.attendance_value = this.attendanceValues[i];
       this.attendance.student_id = this.studentList[i].student_id;
-      this.attendanceService.updateAttendance(this.attendance.student_id, this.attendance.date, this.attendance).subscribe(
+      this.attendance.id = this.studentList[i].id;
+
+      this.getAttendanceAll();
+
+      this.attendanceService.updateAttendance(this.attendance.id, this.attendance).subscribe(
         res => {
           this.edit = true;
-          this.router.navigate([`students/group/`, this.course.id, this.attendance.date]);
+          this.router.navigate([`attendance/group/`, this.course.id]);
         },
         err => console.log(err)
       );
@@ -159,6 +160,7 @@ export class AttendanceListRegistrationComponent implements OnInit {
     for (let i = 0; i < this.attendanceValues.length; i++) {
 
       const newAttendance: Attendance = {};
+      newAttendance.id = this.attendance.id;
       newAttendance.date = this.attendance.date;
       newAttendance.attendance_value = this.attendanceValues[i];
       newAttendance.lesson = this.attendance.lesson;

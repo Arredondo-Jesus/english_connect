@@ -11,7 +11,7 @@ class AttendanceRoutes {
         this.router.get('/group/:id', attendanceController_1.attendanceController.listByDate);
         this.router.get('/register/:id', attendanceController_1.attendanceController.getGroup);
         this.router.get('/edit/:id/:date', attendanceController_1.attendanceController.getAttendanceByGroup);
-        this.router.put('/edit/:id/:date', attendanceController_1.attendanceController.update);
+        this.router.put('/edit/:id', attendanceController_1.attendanceController.update);
         this.router.get('/:id', attendanceController_1.attendanceController.getOne);
         this.router.post('/', attendanceController_1.attendanceController.create);
         this.router.delete('/:id', attendanceController_1.attendanceController.delete);

@@ -22,7 +22,7 @@
               <div class="col text-white text-center">Value</div>
             </div>
             <div class="row p-1 border border-secondary" *ngFor="let student of studentList let i = index">
-              <div class="col text-center">{{i + 1}} {{student.name}} {{student.last_name}}</div>
+              <div class="col text-center">{{i+1  }} {{student.name}} {{student.last_name}}</div>
               <div class="col text-center">
                 <select name="attendanceOptions[{{i}}]" [(ngModel)]="attendanceValues[i]">
                   <option  [ngValue] = "values[0].value">Yes</option>
