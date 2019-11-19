@@ -23,6 +23,7 @@ import { StudentsService } from './services/students.service';
 import { StudentListGroupComponent } from './components/student-list-group/student-list-group.component';
 import { AttendanceListRegistrationComponent } from './components/attendance-list-registration/attendance-list-registration.component';
 import { AttendanceListEditComponent } from './components/attendance-list-edit/attendance-list-edit.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { AttendanceListEditComponent } from './components/attendance-list-edit/a
     InstructorListComponent,
     StudentListGroupComponent,
     AttendanceListRegistrationComponent,
-    AttendanceListEditComponent
+    AttendanceListEditComponent,
+    UserFormComponent
   ],
   imports: [
     BrowserModule,

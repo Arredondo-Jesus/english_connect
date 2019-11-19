@@ -54,7 +54,7 @@ export class StudentListGroupComponent implements OnInit {
 
   updateAttendance(id: string) {
     this.attendance.date = this.activatedRoute.snapshot.params.date;
-    this.attendaceService.updateAttendance(id, this.attendance.date, this.attendance).subscribe(
+    this.attendaceService.updateAttendance(id, this.attendance).subscribe(
       res => {
         console.log(res);
         this.getByGroup();

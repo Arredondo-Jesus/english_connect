@@ -7,6 +7,7 @@ import courseRoutes from './routes/courseRoutes';
 import instructorRoutes from './routes/instructorRoutes';
 import studentRoutes from './routes/studentRoutes';
 import attendanceRoutes from './routes/attendanceRoutes';
+import  userRoutes from './routes/userRoutes';
 
 
 class Server {
@@ -33,6 +34,7 @@ class Server {
         this.app.use('/api/students', studentRoutes);
         this.app.use('/api/instructors', instructorRoutes);
         this.app.use('/api/attendance', attendanceRoutes);
+        this.app.use('/api/users', userRoutes);
     }
 
     start(): void {

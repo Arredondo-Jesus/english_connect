@@ -11,6 +11,7 @@ import { StudentFormComponent } from './components/student-form/student-form.com
 import { AttendanceListComponent } from './components/attendance-list/attendance-list.component';
 import { StudentListGroupComponent } from './components/student-list-group/student-list-group.component';
 import { AttendanceListRegistrationComponent } from './components/attendance-list-registration/attendance-list-registration.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
 
 const routes: Routes = [
   {
@@ -89,6 +90,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginFormComponent
+  },
+  {
+    path: 'user',
+    component: UserFormComponent
   }
 ];
 
