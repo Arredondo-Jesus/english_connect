@@ -16,8 +16,8 @@ export class UserService {
     return this.http.get(`${this.API_URI}/users`);
   }
 
-  getUser(name: string, password: string) {
-    return this.http.get(`${this.API_URI}/user`);
+  getUser(id: string | number) {
+    return this.http.get(`${this.API_URI}/users/${id}`);
   }
 
   saveUser(user: User) {
@@ -25,10 +25,10 @@ export class UserService {
   }
 
   deleteUsers(id: string | number, updatedUser: User) {
-    return this.http.put(`${this.API_URI}/users/delete`, updatedUser);
+    return this.http.put(`${this.API_URI}/users/delete/${id}`, updatedUser);
   }
 
   updateUsers(id: string | number, updatedUser: User) {
-    return this.http.put(`${this.API_URI}/users/update`, updatedUser);
+    return this.http.put(`${this.API_URI}/users/${id}`, updatedUser);
   }
 }

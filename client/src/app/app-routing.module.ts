@@ -12,6 +12,7 @@ import { AttendanceListComponent } from './components/attendance-list/attendance
 import { StudentListGroupComponent } from './components/student-list-group/student-list-group.component';
 import { AttendanceListRegistrationComponent } from './components/attendance-list-registration/attendance-list-registration.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 const routes: Routes = [
   {
@@ -92,7 +93,19 @@ const routes: Routes = [
     component: LoginFormComponent
   },
   {
-    path: 'user',
+    path: 'users',
+    component: UserListComponent
+  },
+  {
+    path: 'users/add',
+    component: UserFormComponent
+  },
+  {
+    path: 'users/delete/:id',
+    component: UserListComponent
+  },
+  {
+    path: 'user/edit/:id',
     component: UserFormComponent
   }
 ];

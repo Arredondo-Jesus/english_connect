@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from 'src/app/models/User';
 import { Instructor } from 'src/app/models/Instructor';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-form',
@@ -29,18 +30,27 @@ export class UserFormComponent implements OnInit {
     'admin'
   ];
 
-  constructor(private userService: UserService) { }
+  edit = false;
+
+  constructor(private userService: UserService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.getUser();
   }
 
   getUser() {
-    this.userService.getUser(this.user.username, this.user.password).subscribe(
-      res => {
-        console.log(res);
-      },
-      err => console.log(err)
-    );
+    const params = this.activatedRoute.snapshot.params;
+    if (params.id) {
+      this.userService.getUser(params.id)
+        .subscribe(
+          res => {
+            console.log(res);
+            this.user = res;
+            this.edit = true;
+          },
+          err => console.log(err)
+        );
+    }
   }
 
   saveNewUser() {
@@ -50,6 +60,32 @@ export class UserFormComponent implements OnInit {
       },
       err => console.log(err)
     );
+  }
+
+  editUser() {
+    delete this.user.id;
+    delete this.user.status;
+
+    this.userService.updateUsers(this.user.id, this.user).subscribe(
+      res => {
+        console.log(res);
+        this.router.navigate(['users']);
+      },
+      err => console.log(err)
+    );
+  }
+
+  updateUser() {
+    delete this.user.status;
+
+    this.userService.updateUsers(this.user.id, this.user)
+        .subscribe(
+          res => {
+            console.log(res);
+            this.router.navigate(['users']);
+          },
+          err => console.log(err)
+        );
   }
 
 }

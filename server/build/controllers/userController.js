@@ -16,15 +16,14 @@ const database2_1 = __importDefault(require("../database2"));
 class UserController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const courses = yield database2_1.default.query(`SELECT * FROM user`);
+            const courses = yield database2_1.default.query(`SELECT * FROM user WHERE status = 'active'`);
             res.json(courses);
         });
     }
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { name } = req.params;
-            const { password } = req.params;
-            const course = yield database2_1.default.query('SELECT * FROM user WHERE name = ? AND password = ?', [name, password]);
+            const { id } = req.params;
+            const course = yield database2_1.default.query('SELECT * FROM user WHERE id = ?', [id]);
             if (course.length > 0) {
                 return res.json(course[0]);
             }
@@ -40,7 +39,7 @@ class UserController {
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            yield database2_1.default.query('UPDATE user SET status = ? WHERE id = ?', [req.body, id]);
+            yield database2_1.default.query(`UPDATE user SET status = ? WHERE id = ?`, [req.body.status, id]);
             res.json({ text: 'User ' + id + ' was deleted successfully' });
         });
     }

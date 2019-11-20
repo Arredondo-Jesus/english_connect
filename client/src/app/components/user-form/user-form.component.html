@@ -1,5 +1,5 @@
 <div class="col-md-6 offset-3">
-  <h3>Create User</h3>
+  <h3>Create / Edit User</h3>
   <div class="card">
     <div class="card-body">
       <form>
@@ -15,7 +15,7 @@
             <option [ngValue]="rols[1]">Admin</option>
           </select>
       </div>
-        <button class="btn btn-primary btn-block" (click)="saveNewUser()">
+        <button class="btn btn-primary btn-block" (click)="edit ? updateUser() : saveNewUser()">
           Save
         </button>
       </form>

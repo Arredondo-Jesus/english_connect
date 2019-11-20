@@ -4,14 +4,13 @@ import pool from '../database2';
 class UserController {
 
     public async list (req: Request, res: Response){
-        const courses = await pool.query(`SELECT * FROM user`);
+        const courses = await pool.query(`SELECT * FROM user WHERE status = 'active'`);
         res.json(courses);
     }
     
     public async getOne (req: Request, res: Response): Promise<any>{
-        const { name } = req.params;
-        const { password } = req.params;
-        const course = await pool.query('SELECT * FROM user WHERE name = ? AND password = ?', [name, password]);
+        const { id } = req.params;
+        const course = await pool.query('SELECT * FROM user WHERE id = ?', [id]);
 
         if (course.length > 0){
             return res.json(course[0]);
@@ -28,7 +27,7 @@ class UserController {
 
     public async delete (req: Request, res: Response): Promise<void>{
         const { id } = req.params;
-        await pool.query('UPDATE user SET status = ? WHERE id = ?', [req.body, id]);
+        await pool.query(`UPDATE user SET status = ? WHERE id = ?`, [req.body.status, id]);
         res.json({text: 'User ' + id + ' was deleted successfully'});
     }
 
