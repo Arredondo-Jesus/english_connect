@@ -4,6 +4,7 @@
   <div class="col text-white text-center">Day</div>
   <div class="col text-white text-center">Time</div>
   <div class="col text-white text-center">Building</div>
+  <div class="col text-white text-center">Username</div>
   <div class="col text-white text-center">Students</div>
   <div class="col text-white text-center">Attendance</div>
   <div class="col text-white text-center">Enroll Student</div>
@@ -15,6 +16,7 @@
   <div class="col text-center">{{course.day}}</div>
   <div class="col text-center">{{course.time}}</div>
   <div class="col text-center">{{course.building}}</div>
+  <div class="col text-center">{{course.username}}</div>
   <div [routerLink]="['/students/group', course.id]" class="col text-center"><button class="btn btn-link p-0">{{course.count}}</button></div>
   <div [routerLink]="['/attendance/group', course.id]" class="col text-center"><button class="btn btn-link p-0">Attendance</button></div>
   <div [routerLink]="['/student/add', course.id]" class="col text-center"><button class="btn btn-link p-0">Enroll</button></div>

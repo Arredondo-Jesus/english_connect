@@ -11,4 +11,5 @@ export interface Course {
   instructor_id?: number;
   status?: string;
   count?: number;
+  username?: string;
 }

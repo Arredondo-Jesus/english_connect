@@ -26,6 +26,27 @@ import { AttendanceListEditComponent } from './components/attendance-list-edit/a
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 
+// Import your library
+import {FirebaseUIModule, firebase, firebaseui} from 'firebaseui-angular';
+
+import {AngularFireModule} from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from 'src/environments/environment';
+
+const firebaseUiAuthConfig: firebaseui.auth.Config = {
+  signInFlow: 'popup',
+  signInOptions: [
+    {
+      requireDisplayName: false,
+      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID
+    },
+  ],
+  // tosUrl: '<your-tos-link>',
+  // privacyPolicyUrl: '<your-privacyPolicyUrl-link>',
+  credentialHelper: firebaseui.auth.CredentialHelper.NONE
+};
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +70,10 @@ import { UserListComponent } from './components/user-list/user-list.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    FirebaseUIModule.forRoot(firebaseUiAuthConfig),
+    AngularFireAuthModule
   ],
   providers: [
     CoursesService,
