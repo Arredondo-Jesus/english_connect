@@ -1,7 +1,18 @@
-<div *ngIf="afAuth.auth.currentUser">
-    <h1>Logged In</h1>
+<div class="col-md-6 offset-3">
+  <h3>Login</h3>
+  <div class="card">
+    <div class="card-body">
+      <form>
+        <div class="form-group">
+          <input type="text" name="username" placeholder="Email" [(ngModel)]="user.username" class="form-control" autofocus>
+        </div>
+        <div class="form-group">
+            <input type="password" name="password" placeholder="Password" [(ngModel)]="user.password" class="form-control">
+        </div>
+        <button class="btn btn-success btn-block" (click)="signIn()">
+          Login
+        </button>
+      </form>
+    </div>
   </div>
-  <div *ngIf="!afAuth.auth.currentUser">
-    <h1>Logged Out</h1>
-    <firebase-ui></firebase-ui>
-  </div>
+</div>

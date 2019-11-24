@@ -33,6 +33,8 @@ import {AngularFireModule} from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 
+import { AuthGuard } from '../app/guards/auth.guard';
+
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
   signInOptions: [
@@ -79,7 +81,8 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     CoursesService,
     InstructorsService,
     StudentsService,
-    AttendanceService
+    AttendanceService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

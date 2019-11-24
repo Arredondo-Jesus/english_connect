@@ -1,5 +1,5 @@
 import { NgModule, Component } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate, Router } from '@angular/router';
 
 import { CourseListComponent } from './components/course-list/course-list.component';
 import { InstructorListComponent } from './components/instructor-list/instructor-list.component';
@@ -13,6 +13,7 @@ import { StudentListGroupComponent } from './components/student-list-group/stude
 import { AttendanceListRegistrationComponent } from './components/attendance-list-registration/attendance-list-registration.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { AuthGuard } from '../app/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -22,71 +23,105 @@ const routes: Routes = [
   },
   {
     path: 'attendance/group/:id',
-    component: AttendanceListComponent
+    component: AttendanceListComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'attendance/register/:id',
-    component: AttendanceListRegistrationComponent
+    component: AttendanceListRegistrationComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'attendance/edit/:id/:date',
-    component: AttendanceListRegistrationComponent
+    component: AttendanceListRegistrationComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'courses',
-    component: CourseListComponent
+    component: CourseListComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'course/add',
-    component: CourseFormComponent
+    component: CourseFormComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'course/edit/:id',
-    component: CourseFormComponent
+    component: CourseFormComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'course/delete/:id',
-    component: CourseListComponent
+    component: CourseListComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'instructors',
-    component: InstructorListComponent
+    component: InstructorListComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'instructors/add',
-    component: InstructorFormComponent
+    component: InstructorFormComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'instructor/edit/:id',
-    component: InstructorFormComponent
+    component: InstructorFormComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'instructor/delete/:id',
-    component: InstructorListComponent
+    component: InstructorListComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'students',
-    component: StudentListComponent
+    component: StudentListComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'student/add/:cid',
-    component: StudentFormComponent
+    component: StudentFormComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'student/edit/:sid',
-    component: StudentFormComponent
+    component: StudentFormComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'student/delete/:id',
-    component: StudentListComponent
+    component: StudentListComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'students/group/:id/:date',
-    component: StudentListGroupComponent
+    component: StudentListGroupComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'students/group/:id',
-    component: StudentListComponent
+    component: StudentListComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
@@ -94,19 +129,27 @@ const routes: Routes = [
   },
   {
     path: 'users',
-    component: UserListComponent
+    component: UserListComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'users/add',
-    component: UserFormComponent
+    component: UserFormComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'users/delete/:id',
-    component: UserListComponent
+    component: UserListComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'user/edit/:id',
-    component: UserFormComponent
+    component: UserFormComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   }
 ];
 
