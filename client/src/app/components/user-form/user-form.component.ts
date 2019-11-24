@@ -3,6 +3,7 @@ import { UserService } from '../../services/user.service';
 import { User } from 'src/app/models/User';
 import { Instructor } from 'src/app/models/Instructor';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-user-form',
@@ -32,7 +33,8 @@ export class UserFormComponent implements OnInit {
 
   edit = false;
 
-  constructor(private userService: UserService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private userService: UserService, private router: Router, private activatedRoute: ActivatedRoute,
+              public afAuth: AngularFireAuth) { }
 
   ngOnInit() {
     this.getUser();
@@ -54,6 +56,8 @@ export class UserFormComponent implements OnInit {
   }
 
   saveNewUser() {
+    delete this.user.password;
+
     this.userService.saveUser(this.user).subscribe(
       res => {
         console.log(res);
@@ -86,6 +90,17 @@ export class UserFormComponent implements OnInit {
           },
           err => console.log(err)
         );
+  }
+
+  signUp() {
+    return this.afAuth.auth.createUserWithEmailAndPassword(this.user.username, this.user.password)
+      .then((result) => {
+        window.alert('You have been successfully registered!');
+        console.log(result.user);
+        this.saveNewUser();
+      }).catch((error) => {
+        window.alert(error.message);
+      });
   }
 
 }
