@@ -25,7 +25,7 @@ class CourseController {
                                           c.year,
                                           c.building,
                                           c.status,
-                                          c.username
+                                          c.userID
                                         FROM course c
                                         LEFT OUTER JOIN student s ON s.course_id = c.id
                                         WHERE c.status = 'active'
