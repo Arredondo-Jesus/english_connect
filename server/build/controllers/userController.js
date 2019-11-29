@@ -11,8 +11,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const database2_1 = __importDefault(require("../database2"));
+const admin = __importStar(require("firebase-admin"));
+const environment_1 = require("../environment");
+var app = admin.initializeApp({
+    credential: admin.credential.cert(environment_1.environment.firebase),
+    databaseURL: "https://english-connect-64693.firebaseio.com"
+});
 class UserController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -48,6 +61,35 @@ class UserController {
             const { id } = req.params;
             yield database2_1.default.query('UPDATE user SET ? WHERE id = ?', [req.body, id]);
             res.json({ text: 'User ' + id + ' was updated successfully' });
+        });
+    }
+    getUserByEmail(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { email } = req.params;
+            yield app.auth().getUserByEmail(email)
+                .then(function (userRecord) {
+                // See the UserRecord reference doc for the contents of userRecord.
+                console.log('Successfully fetched user data:', userRecord.toJSON());
+                return userRecord.toJSON();
+            })
+                .catch(function (error) {
+                console.log('Error fetching user data:', error);
+            });
+        });
+    }
+    disableUser(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { uid } = req.params;
+            yield app.auth().updateUser(uid, {
+                disabled: true
+            })
+                .then(function (userRecord) {
+                // See the UserRecord reference doc for the contents of userRecord.
+                console.log('Successfully updated user', userRecord.toJSON());
+            })
+                .catch(function (error) {
+                console.log('Error updating user:', error);
+            });
         });
     }
 }

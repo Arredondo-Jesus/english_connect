@@ -31,4 +31,8 @@ export class UserService {
   updateUsers(id: string | number, updatedUser: User) {
     return this.http.put(`${this.API_URI}/users/${id}`, updatedUser);
   }
+
+  getUserByEmail(email: string) {
+    return this.http.get(`${this.API_URI}/users/search/${email}`);
+  }
 }

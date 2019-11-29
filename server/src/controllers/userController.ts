@@ -1,5 +1,12 @@
 import {Request , Response} from 'express';
-import pool from '../database2';    
+import pool from '../database2';
+import * as admin from 'firebase-admin';
+import { environment } from '../environment';
+
+var app = admin.initializeApp({
+    credential: admin.credential.cert(environment.firebase),
+    databaseURL: "https://english-connect-64693.firebaseio.com"
+});
 
 class UserController {
 
@@ -35,6 +42,33 @@ class UserController {
         const { id } = req.params;
         await pool.query('UPDATE user SET ? WHERE id = ?', [req.body, id]);
         res.json({text: 'User ' + id + ' was updated successfully'});
+    }
+
+    public async getUserByEmail(req: Request, res: Response) {
+        const { email } = req.params;
+        await app.auth().getUserByEmail(email)
+            .then(function(userRecord) {
+            // See the UserRecord reference doc for the contents of userRecord.
+            console.log('Successfully fetched user data:', userRecord.toJSON());
+            return userRecord.toJSON();
+        })
+        .catch(function(error) {
+            console.log('Error fetching user data:', error);
+        });
+    }
+
+    public async disableUser(req: Request, res: Response) {
+        const { uid } = req.params;
+        await app.auth().updateUser(uid, {
+            disabled: true
+          })
+            .then(function(userRecord) {
+              // See the UserRecord reference doc for the contents of userRecord.
+              console.log('Successfully updated user', userRecord.toJSON());
+            })
+            .catch(function(error) {
+              console.log('Error updating user:', error);
+            });
     }
 }
 
