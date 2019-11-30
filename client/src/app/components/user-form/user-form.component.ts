@@ -136,8 +136,12 @@ export class UserFormComponent implements OnInit {
     );
   }
 
-  disableUser() {
-    this.fireBaseUser.disabled = true;
+  disableUser(disabled: boolean) {
+    if (disabled === true) {
+      this.fireBaseUser.disabled = false;
+    } else if (disabled === false) {
+      this.fireBaseUser.disabled = true;
+    }
     this.userService.updateUser(this.fireBaseUser.uid, this.fireBaseUser).subscribe(
       res => {
         console.log(this.fireBaseUser);

@@ -18,8 +18,8 @@
         <button class="btn btn-primary btn-block form-control" [hidden]="edit == true" (click)="edit ? updateUser() : signUp()">
           Save
         </button>
-        <button class="btn btn-danger btn-block form-control" [hidden]="edit == false" (click)="disableUser()">
-          Disable User
+        <button class="btn btn-danger btn-block form-control" [hidden]="edit == false" (click)="disableUser(fireBaseUser.disabled)">
+            {{ fireBaseUser.disabled == true ? 'Activate Account' : 'Disable Account' }}
         </button>
       </form>
     </div>
