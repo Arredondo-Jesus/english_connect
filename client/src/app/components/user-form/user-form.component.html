@@ -15,10 +15,10 @@
             <option [ngValue]="rols[1]">Admin</option>
           </select>
       </div>
-        <button class="btn btn-primary btn-block form-control" (click)="edit ? updateUser() : signUp()">
+        <button class="btn btn-primary btn-block form-control" [hidden]="edit == true" (click)="edit ? updateUser() : signUp()">
           Save
         </button>
-        <button class="btn btn-danger btn-block form-control" (click)="disableUser()">
+        <button class="btn btn-danger btn-block form-control" [hidden]="edit == false" (click)="disableUser()">
           Disable User
         </button>
       </form>
