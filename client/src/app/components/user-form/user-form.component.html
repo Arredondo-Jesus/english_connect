@@ -4,19 +4,22 @@
     <div class="card-body">
       <form>
         <div class="form-group">
-          <input type="email" name="username" placeholder="Email" [(ngModel)]="user.username"  class="form-control" autofocus>
+          <input type="email" name="email" placeholder="Email" [(ngModel)]="fireBaseUser.email"  class="form-control" autofocus>
         </div>
         <div class="form-group">
-            <input type="password" name="password" placeholder="Password" [(ngModel)]="user.password" class="form-control">
+            <input type="password" name="password" placeholder="Password" [(ngModel)]="fireBaseUser.password" class="form-control">
         </div>
         <div class="form-group">
-          <select name="rol" class="form-control" [(ngModel)]="user.role" placeholder="Rol">
+          <select name="rol" class="form-control" [(ngModel)]="fireBaseUser.role" placeholder="Rol">
             <option [ngValue]="rols[0]">Instructor</option>
             <option [ngValue]="rols[1]">Admin</option>
           </select>
       </div>
-        <button class="btn btn-primary btn-block" (click)="edit ? updateUser() : signUp()">
+        <button class="btn btn-primary btn-block form-control" (click)="edit ? updateUser() : signUp()">
           Save
+        </button>
+        <button class="btn btn-danger btn-block form-control" (click)="disableUser()">
+          Disable User
         </button>
       </form>
     </div>

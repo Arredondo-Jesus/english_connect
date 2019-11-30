@@ -4,6 +4,7 @@ import { User } from 'src/app/models/User';
 import { Instructor } from 'src/app/models/Instructor';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { FireBaseUser } from 'src/app/models/fireBaseUser';
 
 @Component({
   selector: 'app-user-form',
@@ -31,6 +32,15 @@ export class UserFormComponent implements OnInit {
     'admin'
   ];
 
+  fireBaseUser: FireBaseUser = {
+    uid: '',
+    email: '',
+    disabled: false,
+    password: '',
+    role: '',
+    status: ''
+  };
+
   edit = false;
 
   constructor(private userService: UserService, private router: Router, private activatedRoute: ActivatedRoute,
@@ -42,13 +52,13 @@ export class UserFormComponent implements OnInit {
 
   getUser() {
     const params = this.activatedRoute.snapshot.params;
-    if (params.id) {
-      this.userService.getUser(params.id)
+    if (params.uid) {
+      this.userService.getUserById(params.uid)
         .subscribe(
           res => {
-            console.log(res);
-            this.user = res;
+            this.fireBaseUser = JSON.parse(res.toString());
             this.edit = true;
+            console.log(this.fireBaseUser.uid);
           },
           err => console.log(err)
         );
@@ -56,11 +66,13 @@ export class UserFormComponent implements OnInit {
   }
 
   saveNewUser() {
-    delete this.user.password;
+    delete this.fireBaseUser.password;
+    delete this.fireBaseUser.disabled;
 
-    this.userService.saveUser(this.user).subscribe(
+    this.userService.saveUser(this.fireBaseUser).subscribe(
       res => {
         console.log(res);
+        this.fireBaseUser.status = 'active';
       },
       err => console.log(err)
     );
@@ -79,7 +91,7 @@ export class UserFormComponent implements OnInit {
     );
   }
 
-  updateUser() {
+  updateUser2() {
     delete this.user.status;
 
     this.userService.updateUsers(this.user.id, this.user)
@@ -93,14 +105,46 @@ export class UserFormComponent implements OnInit {
   }
 
   signUp() {
-    return this.afAuth.auth.createUserWithEmailAndPassword(this.user.username, this.user.password)
+    return this.afAuth.auth.createUserWithEmailAndPassword(this.fireBaseUser.email, this.fireBaseUser.password)
       .then((result) => {
         window.alert('You have been successfully registered!');
         console.log(result.user);
         this.saveNewUser();
+        this.router.navigate(['users']);
       }).catch((error) => {
         window.alert(error.message);
       });
+  }
+
+  updateUser() {
+    this.userService.updateUser(this.fireBaseUser.uid, this.fireBaseUser).subscribe(
+      res => {
+        console.log(res);
+        this.fireBaseUser = res;
+      },
+      err => console.log(err)
+    );
+  }
+
+  getById(uid: string) {
+    this.userService.getUserById(uid).subscribe(
+      res => {
+        this.fireBaseUser = res;
+        console.log('Found user ' + this.fireBaseUser.uid);
+      },
+      err => console.log(err)
+    );
+  }
+
+  disableUser() {
+    this.fireBaseUser.disabled = true;
+    this.userService.updateUser(this.fireBaseUser.uid, this.fireBaseUser).subscribe(
+      res => {
+        console.log(this.fireBaseUser);
+        this.router.navigate(['users']);
+      },
+      err => console.log(err)
+    );
   }
 
 }

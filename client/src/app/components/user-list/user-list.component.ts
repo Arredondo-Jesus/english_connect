@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/User';
+import { FireBaseUser } from 'src/app/models/fireBaseUser';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
@@ -10,6 +12,7 @@ import { User } from 'src/app/models/User';
 export class UserListComponent implements OnInit {
 
   users: any = [];
+  fireBaseUsers: any = [];
 
   user: User = {
     id: 0,
@@ -19,10 +22,26 @@ export class UserListComponent implements OnInit {
     status: 'inactive'
   };
 
-  constructor(private userService: UserService) { }
+  fireBaseUser: FireBaseUser = {
+    uid: '',
+    email: '',
+    disabled: false
+  };
+
+  constructor(private userService: UserService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getUsers();
+    this.getFirebaseUsers();
+  }
+
+  getFirebaseUsers() {
+    this.userService.getUsers().subscribe(
+      res => {
+        console.log(res);
+        this.fireBaseUsers = res;
+      },
+      err => console.log(err)
+    );
   }
 
   getUsers() {
@@ -46,18 +65,13 @@ export class UserListComponent implements OnInit {
     );
   }
 
-  getByEmail(email: string) {
-    this.userService.getUserByEmail(email).subscribe(
+  getById(uid: string) {
+    this.userService.getUserById(uid).subscribe(
       res => {
-        console.log('Found user ' + res.toLocaleString());
-        this.user = res;
+        this.fireBaseUser = res;
+        console.log('Found user ' + this.fireBaseUser.uid);
       },
-      err => console.log()
+      err => console.log(err)
     );
   }
-
-  disableUser() {
-
-  }
-
 }

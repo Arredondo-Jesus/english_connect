@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { User } from '../models/User';
+import { FireBaseUser } from '../models/fireBaseUser';
 
 @Injectable({
   providedIn: 'root'
@@ -32,15 +33,11 @@ export class UserService {
     return this.http.put(`${this.API_URI}/users/${id}`, updatedUser);
   }
 
-  getUserByEmail(email: string) {
-    return this.http.get(`${this.API_URI}/users/search/${email}`);
+  getUserById(uid: string) {
+    return this.http.get(`${this.API_URI}/users/search/${uid}`);
   }
 
-  disableUser(uid: string, updatedStatus: string) {
-    return this.http.post(`${this.API_URI}/users/disable/${uid}`, updatedStatus);
-  }
-
-  enableUser(uid: string, updatedStatus: string) {
-    return this.http.post(`${this.API_URI}/users/enable/${uid}`, updatedStatus);
+  updateUser(uid: string, updatedUser: FireBaseUser) {
+    return this.http.post(`${this.API_URI}/users/update/${uid}`, updatedUser);
   }
 }

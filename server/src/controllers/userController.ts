@@ -44,44 +44,48 @@ class UserController {
         res.json({text: 'User ' + id + ' was updated successfully'});
     }
 
-    public async getUserByEmail(req: Request, res: Response) {
-        const { email } = req.params;
-        await app.auth().getUserByEmail(email)
-            .then(function(userRecord) {
+    public async getUserById(req: Request, res: Response) {
+        const { uid } = req.params;
+        await app.auth().getUser(uid)
+            .then((userRecord) => {
             // See the UserRecord reference doc for the contents of userRecord.
-            console.log('Successfully fetched user data:', userRecord.toJSON());
+            res.json(JSON.stringify(userRecord));
         })
-        .catch(function(error) {
-            console.log('Error fetching user data:', error);
+        .catch((error) => {
+            res.json(error);
         });
     }
 
-    public async disableUser(req: Request, res: Response) {
+    public async updateUser(req: Request, res: Response) {
         const { uid } = req.params;
         await app.auth().updateUser(uid, {
-            disabled: true
+            email: req.body.email,
+            disabled: req.body.disabled,
+            password: req.body.password 
           })
-            .then(function(userRecord) {
+            .then((userRecord) => {
               // See the UserRecord reference doc for the contents of userRecord.
-              console.log('Successfully updated user', userRecord.toJSON());
+              res.json(JSON.stringify(userRecord));
             })
-            .catch(function(error) {
-              console.log('Error updating user:', error);
+            .catch((error) => {
+              res.json(error);
             });
     }
-
-    public async enableUser(req: Request, res: Response) {
-        const { uid } = req.params;
-        await app.auth().updateUser(uid, {
-            disabled: false
-          })
-            .then(function(userRecord) {
-              // See the UserRecord reference doc for the contents of userRecord.
-              console.log('Successfully updated user', userRecord.toJSON());
-            })
-            .catch(function(error) {
-              console.log('Error updating user:', error);
-            });
+    
+    public async listAllUsers(req: Request, res: Response) {
+      let userList: any = [];  
+      // List batch of users, 1000 at a time.
+        admin.auth().listUsers(1000)
+        .then((listUsersResult)  => {
+          listUsersResult.users.forEach((userRecord) => {
+            userList.push(userRecord.toJSON());
+          });
+          console.log(userList);
+          res.json(userList);
+        })
+        .catch(function(error) {
+          console.log('Error listing users:', error);
+        });
     }
 }
 
