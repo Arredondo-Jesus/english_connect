@@ -4,13 +4,13 @@
   <div class="col text-white text-center">Role</div>
   <div class="col text-white text-center">Status</div>
   <div class="col text-white text-center">Edit User</div>
-  <div class="col text-white text-center">Delete User</div>
+  <div class="col text-white text-center">Find</div>
 </div>
 <div class="row p-1 border border-secondary" *ngFor="let user of users">
   <div class="col text-center">{{user.username}}</div>
   <div class="col text-center">{{user.role}}</div>
   <div class="col text-center">{{user.status}}</div>
   <div [routerLink]="['/user/edit', user.id]" class="col text-center"><button class="btn btn-link p-0">Edit</button></div>
-  <div class="col text-center"><button class="btn btn-link p-0" (click)="deleteUser(user.id)">Delete</button></div>
+  <div class="col text-center"><button class="btn btn-link p-0" (click)="getByEmail(user.username)">Find</button></div>
 </div>
 

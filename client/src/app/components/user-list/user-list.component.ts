@@ -46,4 +46,18 @@ export class UserListComponent implements OnInit {
     );
   }
 
+  getByEmail(email: string) {
+    this.userService.getUserByEmail(email).subscribe(
+      res => {
+        console.log('Found user ' + res.toLocaleString());
+        this.user = res;
+      },
+      err => console.log()
+    );
+  }
+
+  disableUser() {
+
+  }
+
 }

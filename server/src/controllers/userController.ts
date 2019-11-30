@@ -50,7 +50,6 @@ class UserController {
             .then(function(userRecord) {
             // See the UserRecord reference doc for the contents of userRecord.
             console.log('Successfully fetched user data:', userRecord.toJSON());
-            return userRecord.toJSON();
         })
         .catch(function(error) {
             console.log('Error fetching user data:', error);
@@ -61,6 +60,20 @@ class UserController {
         const { uid } = req.params;
         await app.auth().updateUser(uid, {
             disabled: true
+          })
+            .then(function(userRecord) {
+              // See the UserRecord reference doc for the contents of userRecord.
+              console.log('Successfully updated user', userRecord.toJSON());
+            })
+            .catch(function(error) {
+              console.log('Error updating user:', error);
+            });
+    }
+
+    public async enableUser(req: Request, res: Response) {
+        const { uid } = req.params;
+        await app.auth().updateUser(uid, {
+            disabled: false
           })
             .then(function(userRecord) {
               // See the UserRecord reference doc for the contents of userRecord.

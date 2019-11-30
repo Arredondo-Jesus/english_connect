@@ -35,4 +35,12 @@ export class UserService {
   getUserByEmail(email: string) {
     return this.http.get(`${this.API_URI}/users/search/${email}`);
   }
+
+  disableUser(uid: string, updatedStatus: string) {
+    return this.http.post(`${this.API_URI}/users/disable/${uid}`, updatedStatus);
+  }
+
+  enableUser(uid: string, updatedStatus: string) {
+    return this.http.post(`${this.API_URI}/users/enable/${uid}`, updatedStatus);
+  }
 }
