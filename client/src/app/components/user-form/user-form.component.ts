@@ -116,6 +116,15 @@ export class UserFormComponent implements OnInit {
       });
   }
 
+  resetPasword() {
+    this.afAuth.auth.sendPasswordResetEmail(this.fireBaseUser.email)
+    .then((result) => {
+      window.alert('Password has been reset successfully');
+    }).catch((error) => {
+      window.alert(error.message);
+    });
+  }
+
   updateUser() {
     this.userService.updateUser(this.fireBaseUser.uid, this.fireBaseUser).subscribe(
       res => {
