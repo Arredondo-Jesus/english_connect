@@ -25,6 +25,8 @@ export class CourseFormComponent implements OnInit {
   };
 
   edit = false;
+  submitted = false;
+  valid = false;
 
   constructor(private courseService: CoursesService, private router: Router, private activatedRoute: ActivatedRoute) { }
 

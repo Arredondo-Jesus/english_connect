@@ -110,5 +110,19 @@ class UserController {
             });
         });
     }
+    getUserPermissions(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { email } = req.params;
+            const user = yield database2_1.default.query(`SELECT u.email,
+                        r.name,
+                        p.section,
+                        p.access
+                        FROM user u
+                        JOIN role r ON r.id = u.role
+                        JOIN permissions p ON r.id = p.role 
+                        WHERE u.email = ?`, [email]);
+            res.json(user);
+        });
+    }
 }
 exports.userController = new UserController();

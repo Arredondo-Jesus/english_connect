@@ -37,6 +37,10 @@ export class UserService {
     return this.http.get(`${this.API_URI}/users/search/${uid}`);
   }
 
+  getUserPermissions(email: string) {
+    return this.http.get(`${this.API_URI}/users/permissions/${email}`);
+  }
+
   updateUser(uid: string, updatedUser: FireBaseUser) {
     return this.http.post(`${this.API_URI}/users/update/${uid}`, updatedUser);
   }

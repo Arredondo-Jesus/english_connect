@@ -28,8 +28,8 @@ export class UserFormComponent implements OnInit {
   };
 
   rols: any = [
-    'instructor',
-    'admin'
+    '1',
+    '2'
   ];
 
   fireBaseUser: FireBaseUser = {

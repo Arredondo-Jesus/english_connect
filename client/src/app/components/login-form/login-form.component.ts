@@ -28,6 +28,7 @@ export class LoginFormComponent implements OnInit {
   constructor(public afAuth: AngularFireAuth, private router: Router) {}
 
   ngOnInit() {
+    this.signOut();
   }
 
   signIn() {
@@ -54,5 +55,4 @@ export class LoginFormComponent implements OnInit {
       this.router.navigate(['/login']);
     });
   }
-
 }

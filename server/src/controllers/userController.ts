@@ -2,6 +2,7 @@ import {Request , Response} from 'express';
 import pool from '../database2';
 import * as admin from 'firebase-admin';
 import { environment } from '../environment';
+import bodyParser = require('body-parser');
 
 var app = admin.initializeApp({
     credential: admin.credential.cert(environment.firebase),
@@ -86,6 +87,19 @@ class UserController {
         .catch(function(error) {
           console.log('Error listing users:', error);
         });
+    }
+
+    public async getUserPermissions(req: Request, res: Response) {
+      const { email } = req.params;
+      const user = await pool.query(`SELECT u.email,
+                        r.name,
+                        p.section,
+                        p.access
+                        FROM user u
+                        JOIN role r ON r.id = u.role
+                        JOIN permissions p ON r.id = p.role 
+                        WHERE u.email = ?`, [email]);
+      res.json(user);
     }
 }
 
