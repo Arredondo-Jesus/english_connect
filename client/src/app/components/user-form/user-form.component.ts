@@ -38,7 +38,7 @@ export class UserFormComponent implements OnInit {
   user: User = {
     uid: '',
     email: '',
-    role: 0,
+    role: 2,
     roleName: '',
   };
 
@@ -193,6 +193,21 @@ export class UserFormComponent implements OnInit {
       res => {
         console.log(this.fireBaseUser);
         this.router.navigate(['users']);
+      },
+      err => console.log(err)
+    );
+  }
+
+  deleteFirebaseUser() {
+    this.userService.deleteUsersFirebase(this.fireBaseUser.uid).subscribe(
+      res => {
+        this.afAuth.authState.subscribe( user => {
+          if (user) {
+            setTimeout(() => {
+              this.router.navigate(['users']);
+            }, 500);
+          }
+        });
       },
       err => console.log(err)
     );

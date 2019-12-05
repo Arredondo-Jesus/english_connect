@@ -33,6 +33,10 @@ export class UserService {
     return this.http.put(`${this.API_URI}/users/delete/${id}`, updatedUser);
   }
 
+  deleteUsersFirebase(uid: string) {
+    return this.http.delete(`${this.API_URI}/users/delete/${uid}`);
+  }
+
   updateUsers(id: string | number, updatedUser: User) {
     return this.http.put(`${this.API_URI}/users/${id}`, updatedUser);
   }

@@ -2,7 +2,6 @@ import {Request , Response} from 'express';
 import pool from '../database2';
 import * as admin from 'firebase-admin';
 import { environment } from '../environment';
-import bodyParser = require('body-parser');
 
 var app = admin.initializeApp({
     credential: admin.credential.cert(environment.firebase),
@@ -107,6 +106,16 @@ class UserController {
                         WHERE u.email = ?`, [email]);
       res.json(user);
     }
-}
 
+    public async deleteUserFirebase(req: Request, res: Response){
+        const { uid } = req.params;
+        admin.auth().deleteUser(uid)
+        .then(() =>{
+          console.log('Successfully deleted user');
+        })
+        .catch((error) =>{
+          console.log('Error deleting user:', error);
+        });
+        }
+    }
 export const userController = new UserController();

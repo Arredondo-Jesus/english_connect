@@ -131,5 +131,17 @@ class UserController {
             res.json(user);
         });
     }
+    deleteUserFirebase(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { uid } = req.params;
+            admin.auth().deleteUser(uid)
+                .then(() => {
+                console.log('Successfully deleted user');
+            })
+                .catch((error) => {
+                console.log('Error deleting user:', error);
+            });
+        });
+    }
 }
 exports.userController = new UserController();

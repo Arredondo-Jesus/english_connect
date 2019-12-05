@@ -4,18 +4,31 @@
     <div class="card-body">
       <form>
         <div class="form-group">
-          <input type="text" name="instructor" placeholder="Instructor name" [(ngModel)]="instructor.name" class="form-control" autofocus>
+          <input type="text" name="instructor" #name="ngModel" placeholder="Instructor name" required [(ngModel)]="instructor.name" class="form-control" autofocus>
+        </div>
+        <div class="alert alert-danger" *ngIf="name.invalid && name.dirty">
+            Name field is required
         </div>
         <div class="form-group">
-            <input type="text" name="lastName" placeholder="Instructor last name" [(ngModel)]="instructor.last_name" class="form-control">
+            <input type="text" name="lastName" #lastName="ngModel" placeholder="Instructor last name" required [(ngModel)]="instructor.last_name" class="form-control">
+        </div>
+        <div class="alert alert-danger" *ngIf="lastName.invalid && lastName.dirty">
+            Last name field is required
         </div>
         <div class="form-group">
-            <input type="text" name="email" placeholder="Instructor email" [(ngModel)]="instructor.email" class="form-control">
+            <input type="text" name="email" #email="ngModel" placeholder="Instructor email" required [(ngModel)]="instructor.email" class="form-control">
+        </div>
+        <div class="alert alert-danger" *ngIf="email.invalid && email.dirty">
+            Email field is required
         </div>
         <div class="form-group">
-            <input type="text" name="phone" placeholder="Instructor phone" [(ngModel)]="instructor.phone" class="form-control">
+            <input type="text" name="phone" #phone="ngModel" placeholder="Instructor phone" required [(ngModel)]="instructor.phone" class="form-control">
         </div>
-        <button class="btn btn-warning btn-block" (click)="edit ? updateInstructor() : saveNewInstructor()">
+        <div class="alert alert-danger" *ngIf="phone.invalid && phone.dirty">
+            Time field is required
+        </div>
+        <button class="btn btn-warning btn-block" (click)="edit ? updateInstructor() : saveNewInstructor()"
+        [disabled]="!name.valid || !lastName.valid || !email.valid || !phone.valid">
           SAVE
         </button>
       </form>
