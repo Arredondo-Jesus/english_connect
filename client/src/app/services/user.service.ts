@@ -17,8 +17,12 @@ export class UserService {
     return this.http.get(`${this.API_URI}/users`);
   }
 
-  getUser(id: string | number) {
-    return this.http.get(`${this.API_URI}/users/${id}`);
+  getUsersDB() {
+    return this.http.get(`${this.API_URI}/users/list`);
+  }
+
+  getUserDB(uid: string) {
+    return this.http.get(`${this.API_URI}/users/${uid}`);
   }
 
   saveUser(user: User) {

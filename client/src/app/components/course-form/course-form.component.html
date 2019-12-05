@@ -15,9 +15,6 @@
   <div class="alert alert-danger" *ngIf="time.invalid && time.dirty">
       The course time is required
   </div>
-  <div class="alert alert-danger" *ngIf="building.invalid && building.dirty">
-      The course building is required
-  </div>
 
   <div class="card">
     <div class="card-body">
@@ -38,10 +35,23 @@
             <input type="text" name="time" #time="ngModel" placeholder="Time of the course" required [(ngModel)]="course.time" class="form-control">
         </div>
         <div class="form-group">
-            <input type="text" name="building" #building="ngModel" placeholder="Church building" required [(ngModel)]="course.building" class="form-control">
+          <select name="building" class="form-control"
+                  [(ngModel)]="course.building">
+            <option *ngFor="let building of buildings let i = index"
+            [ngValue]="building"
+            [selected]="course.building === building && edit === true">{{building}}</option>
+          </select>
         </div>
-        <button class="btn btn-primary btn-block" (click)="edit && valid ? updateCourse() : saveNewCourse()"
-                [disabled]="!name.valid || !level.valid || !year.valid || !day.valid || !time.valid || !building.valid" >
+        <div class="form-group">
+          <select name="assigned" class="form-control" [(ngModel)]="course.instructor_id" name="instructorList">
+            <option *ngFor="let instructor of instructors"
+                    [selected]="instructors.id === course.instructor_id && edit === true"
+                    [selected]="instructors[0].id && edit === false"
+                    [ngValue]="instructor.id">{{instructor.name}} {{instructor.last_name}}</option>
+          </select>
+        </div>
+        <button class="btn btn-primary btn-block" (click)="edit ? updateCourse() : saveNewCourse()"
+                [disabled]="!name.valid || !level.valid || !year.valid || !day.valid || !time.valid" >
           SAVE
         </button>
       </form>

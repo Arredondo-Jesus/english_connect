@@ -29,18 +29,25 @@ var app = admin.initializeApp({
 class UserController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const courses = yield database2_1.default.query(`SELECT * FROM user WHERE status = 'active'`);
+            const courses = yield database2_1.default.query(`SELECT u.uid, u.email,
+                                          r.name AS 'roleName',
+                                          r.id AS 'role'
+                                          FROM user u
+                                          JOIN role r ON r.id = u.role`);
             res.json(courses);
         });
     }
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
-            const course = yield database2_1.default.query('SELECT * FROM user WHERE id = ?', [id]);
-            if (course.length > 0) {
-                return res.json(course[0]);
-            }
-            res.status(404).json(res.json({ text: 'User was not found' }));
+            const { uid } = req.params;
+            const user = yield database2_1.default.query(`SELECT u.uid, 
+                                              u.email,
+                                              r.name AS 'roleName',
+                                              r.id AS 'role'
+                                       FROM user u
+                                       JOIN  role r ON u.role = r.id
+                                       WHERE u.uid = ?`, [uid]);
+            res.json(user);
         });
     }
     create(req, res) {
@@ -58,9 +65,9 @@ class UserController {
     }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
-            yield database2_1.default.query('UPDATE user SET ? WHERE id = ?', [req.body, id]);
-            res.json({ text: 'User ' + id + ' was updated successfully' });
+            const { uid } = req.params;
+            yield database2_1.default.query('UPDATE user SET ? WHERE uid = ?', [req.body, uid]);
+            res.json({ text: 'User ' + uid + ' was updated successfully' });
         });
     }
     getUserById(req, res) {

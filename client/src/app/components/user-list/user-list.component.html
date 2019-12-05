@@ -4,18 +4,15 @@
   <div class="col text-white text-center">Last SignIn</div>
   <div class="col text-white text-center">Created At</div>
   <div class="col text-white text-center">Disabled</div>
+  <div class="col text-white text-center">Role</div>
   <div class="col text-white text-center">Edit</div>
 </div>
-<div class="row p-1 border border-secondary" *ngFor="let fireBaseUser of fireBaseUsers">
-  <div class="col text-center sm-3">{{fireBaseUser.email}}</div>
+<div class="row p-1 border border-secondary" *ngFor="let fireBaseUser of fireBaseUsers; let i = index">
+  <div class="col text-center sm-3">{{fireBaseUser.uid}} {{fireBaseUser.email}}</div>
   <div class="col text-center sm-3">{{fireBaseUser.metadata.lastSignInTime}}</div>
   <div class="col text-center sm-3">{{fireBaseUser.metadata.creationTime}}</div>
   <div class="col text-center sm-3">{{fireBaseUser.disabled}}</div>
-  <div [routerLink]="['/user/update', fireBaseUser.uid]" class="col text-center">
-    <button class="btn btn-warning">Edit</button>
-  </div>
+  <div class="col text-center sm-3">{{users[i].roleName}}</div>
   <div class="col text-center">
-    <button class="btn btn-info" (click)="getById(fireBaseUser.uid)">
-        Reset Password
-    </button>
+    <button class="btn btn-warning" (click)="getDBUser(fireBaseUser.uid); getById(fireBaseUser.uid)">Edit</button>
   </div>

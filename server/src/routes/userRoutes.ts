@@ -10,13 +10,14 @@ class UserRoutes {
 
     config(): void {
         this.router.get('/', userController.listAllUsers);
-        this.router.get('/:id', userController.getOne);
+        this.router.get('/list', userController.list);
+        this.router.get('/:uid', userController.getOne);
         this.router.get('/search/:uid', userController.getUserById);
         this.router.get('/permissions/:email', userController.getUserPermissions);
         this.router.post('/update/:uid', userController.updateUser);
         this.router.post('/', userController.create);
         this.router.put('/delete/:id', userController.delete);
-        this.router.put('/:id', userController.update);
+        this.router.put('/:uid', userController.update);
     }
 }
 

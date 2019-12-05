@@ -3,6 +3,7 @@ import { Course } from 'src/app/models/Course';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { CoursesService } from '../../services/courses.service';
+import { InstructorsService } from 'src/app/services/instructors.service';
 
 @Component({
   selector: 'app-course-form',
@@ -13,25 +14,30 @@ export class CourseFormComponent implements OnInit {
 
   @HostBinding('class') classes = 'row';
 
+  instructors: any = [];
+  buildings: any = ['Garcia', 'Lincoln', 'Hacienda', 'Valle Verde', 'Fryle'];
+
   course: Course = {
     id: 0,
     level: 1,
     year: '',
     day: '',
     time: '',
-    building: '',
+    building: 'Garcia',
     created_at: new Date(),
-    status: ''
+    status: '',
+    instructor_id: 0
   };
 
   edit = false;
-  submitted = false;
-  valid = false;
 
-  constructor(private courseService: CoursesService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private courseService: CoursesService, private router: Router, private activatedRoute: ActivatedRoute,
+              private instructorService: InstructorsService) { }
 
   ngOnInit() {
    this.getCourse();
+   this.getIntructors();
+   console.log(this.buildings);
   }
 
   getCourse() {
@@ -59,6 +65,7 @@ export class CourseFormComponent implements OnInit {
         res => {
           console.log(this.course);
           this.router.navigate(['courses']);
+          this.edit = false;
         },
          err => console.log(err)
       );
@@ -73,10 +80,20 @@ export class CourseFormComponent implements OnInit {
         .subscribe(
           res => {
             console.log(res);
+            this.edit = true;
             this.router.navigate(['courses']);
           },
           err => console.log(err)
         );
+  }
+
+  getIntructors() {
+    this.instructorService.getInstructors().subscribe(
+      res => {
+        this.instructors = res;
+      },
+      err => console.log(err)
+    );
   }
 }
 

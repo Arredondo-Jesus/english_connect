@@ -150,6 +150,12 @@ const routes: Routes = [
     component: UserFormComponent,
     canLoad: [AuthGuard],
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'users/:email',
+    component: UserFormComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   }
 ];
 

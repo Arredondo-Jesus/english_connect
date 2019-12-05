@@ -12,19 +12,25 @@ var app = admin.initializeApp({
 class UserController {
 
     public async list (req: Request, res: Response){
-        const courses = await pool.query(`SELECT * FROM user WHERE status = 'active'`);
+        const courses = await pool.query(`SELECT u.uid, u.email,
+                                          r.name AS 'roleName',
+                                          r.id AS 'role'
+                                          FROM user u
+                                          JOIN role r ON r.id = u.role`);
         res.json(courses);
     }
     
     public async getOne (req: Request, res: Response): Promise<any>{
-        const { id } = req.params;
-        const course = await pool.query('SELECT * FROM user WHERE id = ?', [id]);
+        const { uid } = req.params;
+        const user = await pool.query(`SELECT u.uid, 
+                                              u.email,
+                                              r.name AS 'roleName',
+                                              r.id AS 'role'
+                                       FROM user u
+                                       JOIN  role r ON u.role = r.id
+                                       WHERE u.uid = ?`, [uid]);
+        res.json(user);
 
-        if (course.length > 0){
-            return res.json(course[0]);
-        }
-
-        res.status(404).json(res.json({text: 'User was not found'}));
     }
 
     
@@ -40,9 +46,9 @@ class UserController {
     }
 
     public async update (req: Request, res: Response){
-        const { id } = req.params;
-        await pool.query('UPDATE user SET ? WHERE id = ?', [req.body, id]);
-        res.json({text: 'User ' + id + ' was updated successfully'});
+        const { uid } = req.params;
+        await pool.query('UPDATE user SET ? WHERE uid = ?', [req.body, uid]);
+        res.json({text: 'User ' + uid + ' was updated successfully'});
     }
 
     public async getUserById(req: Request, res: Response) {

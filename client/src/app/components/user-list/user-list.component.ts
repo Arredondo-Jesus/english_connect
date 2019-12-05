@@ -15,10 +15,10 @@ export class UserListComponent implements OnInit {
   fireBaseUsers: any = [];
 
   user: User = {
-    id: 0,
-    username: '',
+    uid: '',
+    email: '',
     password: '',
-    role: '',
+    role: 0,
     status: 'inactive'
   };
 
@@ -32,6 +32,21 @@ export class UserListComponent implements OnInit {
 
   ngOnInit() {
     this.getFirebaseUsers();
+    this.getUsersDB();
+
+  }
+
+  getUsersDB() {
+    this.userService.getUsersDB().subscribe(
+      res => {
+        console.log(res);
+        this.users = res;
+        this.users.forEach(user => {
+          this.fireBaseUser.role = user.role;
+        });
+      },
+      err => console.log(err)
+    );
   }
 
   getFirebaseUsers() {
@@ -39,6 +54,16 @@ export class UserListComponent implements OnInit {
       res => {
         console.log(res);
         this.fireBaseUsers = res;
+      },
+      err => console.log(err)
+    );
+  }
+
+  getDBUser(uid: string) {
+    this.userService.getUserDB(uid).subscribe(
+      res => {
+        console.log(res);
+        this.user = res;
       },
       err => console.log(err)
     );
@@ -54,9 +79,9 @@ export class UserListComponent implements OnInit {
     );
   }
 
-  deleteUser(id: number) {
-    this.user.id = id;
-    this.userService.deleteUsers(this.user.id, this.user).subscribe(
+  deleteUser(uid: string) {
+    this.user.uid = uid;
+    this.userService.deleteUsers(this.user.uid, this.user).subscribe(
       res => {
         console.log(res);
         this.getUsers();
@@ -68,10 +93,29 @@ export class UserListComponent implements OnInit {
   getById(uid: string) {
     this.userService.getUserById(uid).subscribe(
       res => {
-        this.fireBaseUser = res;
+        this.fireBaseUser = JSON.parse(res.toString());
         console.log('Found user ' + this.fireBaseUser.uid);
+        this.router.navigate(['/user/update', this.fireBaseUser.uid]);
       },
       err => console.log(err)
     );
+  }
+
+  updateUser2() {
+    delete this.user.status;
+    delete this.user.number_login;
+    delete this.user.password;
+    delete this.user.roleName;
+
+    this.user.email = this.fireBaseUser.email;
+    const count = this.fireBaseUsers.length;
+
+    this.userService.updateUsers(this.fireBaseUsers[this.fireBaseUsers[count - 1]].uid, this.user)
+        .subscribe(
+          res => {
+            console.log(count);
+          },
+          err => console.log(err)
+        );
   }
 }

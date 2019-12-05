@@ -9,13 +9,14 @@ class UserRoutes {
     }
     config() {
         this.router.get('/', userController_1.userController.listAllUsers);
-        this.router.get('/:id', userController_1.userController.getOne);
+        this.router.get('/list', userController_1.userController.list);
+        this.router.get('/:uid', userController_1.userController.getOne);
         this.router.get('/search/:uid', userController_1.userController.getUserById);
         this.router.get('/permissions/:email', userController_1.userController.getUserPermissions);
         this.router.post('/update/:uid', userController_1.userController.updateUser);
         this.router.post('/', userController_1.userController.create);
         this.router.put('/delete/:id', userController_1.userController.delete);
-        this.router.put('/:id', userController_1.userController.update);
+        this.router.put('/:uid', userController_1.userController.update);
     }
 }
 const userRoutes = new UserRoutes();

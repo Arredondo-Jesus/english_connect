@@ -4,6 +4,7 @@ export interface FireBaseUser {
   disabled?: boolean;
   email?: string;
   password?: string;
-  role?: string;
+  role?: number;
+  roleName?: string;
   status?: string;
 }
