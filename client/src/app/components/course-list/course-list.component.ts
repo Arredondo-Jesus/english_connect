@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CoursesService } from '../../services/courses.service';
 import { StudentsService } from '../../services/students.service';
 import { Course } from 'src/app/models/Course';
+import { UserService } from 'src/app/services/user.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-course-list',
@@ -13,6 +15,7 @@ import { Course } from 'src/app/models/Course';
 export class CourseListComponent implements OnInit {
 
   courses: any = [];
+  permissions: any = [];
 
   course: Course = {
     id: 0,
@@ -20,10 +23,12 @@ export class CourseListComponent implements OnInit {
     count: 0
   };
 
-  constructor(private coursesService: CoursesService, private studentService: StudentsService, router: Router) { }
+  constructor(private coursesService: CoursesService, private studentService: StudentsService, router: Router,
+              private userService: UserService, private afAuth: AngularFireAuth) { }
 
   ngOnInit() {
     this.getCourses();
+    this.getPermissions(this.afAuth.auth.currentUser.email);
   }
 
   getCourses() {
@@ -44,6 +49,16 @@ export class CourseListComponent implements OnInit {
       res => {
         console.log(res);
         this.getCourses();
+      },
+      err => console.log(err)
+    );
+  }
+
+  getPermissions(email: string) {
+    this.userService.getUserPermissions(email).subscribe(
+      res => {
+        console.log(res);
+        this.permissions = res;
       },
       err => console.log(err)
     );

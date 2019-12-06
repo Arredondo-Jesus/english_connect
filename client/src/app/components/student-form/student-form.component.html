@@ -3,35 +3,55 @@
   <div class="card">
     <div class="card-body">
       <form>
-        <div class="form-group">
-          <input type="text" name="name" #name="ngModel" required placeholder="Student name" [(ngModel)]="student.name" class="form-control" autofocus>
+          <div class="form-group">
+            <input type="text" name="name" #name="ngModel"placeholder="Instructor name" pattern="^[a-zA-Z\s]*$"
+          required [(ngModel)]="student.name" class="form-control" autofocus>
         </div>
-        <div class="alert alert-danger" *ngIf="name.invalid && name.dirty">
-            Name field is required
+        <div class="alert alert-danger" *ngIf="name.value === '' && name.dirty">
+            The student name is required
         </div>
-        <div class="form-group">
-            <input type="text" name="last_name" #lastName="ngModel" required placeholder="Student Last Name" [(ngModel)]="student.last_name" class="form-control">
-        </div>
-        <div class="alert alert-danger" *ngIf="lastName.invalid && lastName.dirty">
-            Last name field is required
+        <div class="alert alert-danger" *ngIf="name.invalid && name.dirty && name.value !== ''">
+            Only letters are allowed
         </div>
         <div class="form-group">
-            <input type="text" name="age" #age="ngModel" required placeholder="Student Age" [(ngModel)]="student.age" class="form-control">
+            <input type="text" name="lastName" #lastName="ngModel" placeholder="Instructor last name" pattern="^[a-zA-Z\s]*$"
+            required [(ngModel)]="student.last_name" class="form-control" autofocus>
+          </div>
+          <div class="alert alert-danger" *ngIf="lastName.value === '' && lastName.dirty">
+              The student last name is required
+          </div>
+          <div class="alert alert-danger" *ngIf="lastName.invalid && lastName.dirty && lastName.value !== ''">
+              Only letters are allowed
+          </div>
+        <div class="form-group">
+            <input type="text" name="age" #age="ngModel" required pattern="\d{0,2}(\.\d{1,2})?"
+            placeholder="Student Age" [(ngModel)]="student.age" class="form-control">
         </div>
         <div class="alert alert-danger" *ngIf="age.invalid && age.dirty">
             Age field is required
         </div>
-        <div class="form-group">
-            <input type="text" name="email" #email="ngModel" required placeholder="Student Email" [(ngModel)]="student.email" class="form-control">
+        <div class="alert alert-danger" *ngIf="age.value === '' && age.dirty && age.value !== ''">
+            Up to 2 digits are allowed
         </div>
-        <div class="alert alert-danger" *ngIf="email.invalid && email.dirty">
+        <div class="form-group">
+            <input type="email" name="email" #email="ngModel" required email placeholder="Email"
+            [(ngModel)]="student.email" class="form-control" autofocus>
+        </div>
+        <div class="alert alert-danger" *ngIf="email.value === '' && email.dirty">
             Email field is required
         </div>
-        <div class="form-group">
-            <input type="text" name="phone" #phone="ngModel" required placeholder="Student Phone" [(ngModel)]="student.phone" class="form-control">
+        <div class="alert alert-danger" *ngIf="email?.errors?.email && email.touched && email.dirty">
+          Email format not valid.
         </div>
-        <div class="alert alert-danger" *ngIf="phone.invalid && phone.dirty">
+        <div class="form-group">
+            <input type="text" name="phone" #phone="ngModel" pattern="[0-9]{10}"
+            required placeholder="Student Phone" [(ngModel)]="student.phone" class="form-control">
+        </div>
+        <div class="alert alert-danger" *ngIf="phone.value === '' && phone.dirty">
             Phone field is required
+        </div>
+        <div class="alert alert-danger" *ngIf="phone.invalid && phone.dirty && phone.value !== ''">
+            Only 10 digits are allowed
         </div>
         <button class="btn btn-danger btn-block" (click)="edit ? updateStudent() : saveNewStudent()"
         [disabled]="!name.valid || !lastName.valid || !age.valid || !email.valid || !phone.valid">

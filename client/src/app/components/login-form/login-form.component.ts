@@ -24,7 +24,6 @@ export class LoginFormComponent implements OnInit {
     password: ''
   };
 
-
   constructor(public afAuth: AngularFireAuth, private router: Router) {}
 
   ngOnInit() {
@@ -53,6 +52,15 @@ export class LoginFormComponent implements OnInit {
   signOut() {
     return this.afAuth.auth.signOut().then(() => {
       this.router.navigate(['/login']);
+    });
+  }
+
+  resetPasword() {
+    this.afAuth.auth.sendPasswordResetEmail(this.user.username)
+    .then((result) => {
+      window.alert('Password has been reset successfully');
+    }).catch((error) => {
+      window.alert(error.message);
     });
   }
 }
