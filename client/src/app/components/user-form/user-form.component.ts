@@ -213,4 +213,13 @@ export class UserFormComponent implements OnInit {
     );
   }
 
+  deleteUserDB() {
+    this.userService.deleteUsers(this.fireBaseUser.uid).subscribe(
+      res => {
+        console.log(res);
+      },
+      err => console.log(err)
+    );
+  }
+
 }

@@ -29,8 +29,8 @@ export class UserService {
     return this.http.post(`${this.API_URI}/users`, user);
   }
 
-  deleteUsers(id: string | number, updatedUser: User) {
-    return this.http.put(`${this.API_URI}/users/delete/${id}`, updatedUser);
+  deleteUsers(id: string) {
+    return this.http.delete(`${this.API_URI}/users/deleteuserDB/${id}`);
   }
 
   deleteUsersFirebase(uid: string) {

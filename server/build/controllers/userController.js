@@ -143,5 +143,12 @@ class UserController {
             });
         });
     }
+    deleteUserDB(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            yield database2_1.default.query(`DELETE FROM user WHERE uid = ?`, [id]);
+            res.json({ text: 'User deleted' + id });
+        });
+    }
 }
 exports.userController = new UserController();

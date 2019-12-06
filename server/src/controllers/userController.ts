@@ -117,5 +117,12 @@ class UserController {
           console.log('Error deleting user:', error);
         });
         }
+
+        public async deleteUserDB(req: Request, res: Response) {
+          const { id } = req.params;
+          await pool.query(`DELETE FROM user WHERE uid = ?`, [id]);
+          res.json({text: 'User deleted' + id});
+        }
+    
     }
 export const userController = new UserController();

@@ -15,8 +15,8 @@ class UserRoutes {
         this.router.get('/permissions/:email', userController_1.userController.getUserPermissions);
         this.router.post('/update/:uid', userController_1.userController.updateUser);
         this.router.post('/', userController_1.userController.create);
-        this.router.put('/delete/:id', userController_1.userController.delete);
-        this.router.delete('/delete/:uid', userController_1.userController.deleteUserFirebase);
+        this.router.delete('/delete/:id', userController_1.userController.deleteUserDB);
+        this.router.delete('/deleteuserDB/:uid', userController_1.userController.deleteUserFirebase);
         this.router.put('/:uid', userController_1.userController.update);
     }
 }
