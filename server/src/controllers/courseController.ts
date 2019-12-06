@@ -12,8 +12,13 @@ class CourseController {
                                           c.day,
                                           c.year,
                                           c.building,
-                                          c.status
+                                          c.status,
+                                          i.id AS 'instructorId', 
+                                          i.name AS 'instructorName',
+                                          i.last_name,
+                                          i.email AS 'instructorEmail'
                                         FROM course c
+                                        JOIN instructor i ON i.id = c.instructor_id
                                         LEFT OUTER JOIN student s ON s.course_id = c.id
                                         WHERE c.status = 'active'
                                         GROUP BY c.id`);

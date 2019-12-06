@@ -6,6 +6,7 @@ import { StudentsService } from '../../services/students.service';
 import { Course } from 'src/app/models/Course';
 import { UserService } from 'src/app/services/user.service';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { access } from 'fs';
 
 @Component({
   selector: 'app-course-list',
@@ -16,19 +17,24 @@ export class CourseListComponent implements OnInit {
 
   courses: any = [];
   permissions: any = [];
+  email =  '';
 
   course: Course = {
     id: 0,
     status: 'inactive',
-    count: 0
+    count: 0,
+    instructorName: '',
+    last_name: '',
+    instructorEmail: ''
   };
 
   constructor(private coursesService: CoursesService, private studentService: StudentsService, router: Router,
               private userService: UserService, private afAuth: AngularFireAuth) { }
 
   ngOnInit() {
-    this.getCourses();
     this.getPermissions(this.afAuth.auth.currentUser.email);
+    this.email = this.afAuth.auth.currentUser.email;
+    this.getCourses();
   }
 
   getCourses() {

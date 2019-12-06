@@ -11,4 +11,7 @@ export interface Course {
   instructor_id?: number;
   status?: string;
   count?: number;
+  instructorName?: string;
+  last_name?: string;
+  instructorEmail?: string;
 }
