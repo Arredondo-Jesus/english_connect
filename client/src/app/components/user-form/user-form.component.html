@@ -29,7 +29,7 @@
         <button class="btn btn-danger btn-block form-control" *ngIf="edit == true" (click)="disableUser(fireBaseUser.disabled)">
             {{ fireBaseUser.disabled == true ? 'Activate Account' : 'Disable Account' }}
         </button>
-        <button class="btn btn-info btn-block form-control" *ngIf="edit == true" (click)="resetPasword(fireBaseUser.disabled)">
+        <button class="btn btn-info btn-block form-control" *ngIf="edit == true" (click)="resetPasword()">
             Reset Password
         </button>
         <button class="btn btn-warning btn-block form-control" *ngIf="edit == true" (click)="deleteFirebaseUser(); deleteUserDB()">
