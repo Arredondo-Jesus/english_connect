@@ -6,7 +6,6 @@ import { StudentsService } from '../../services/students.service';
 import { Course } from 'src/app/models/Course';
 import { UserService } from 'src/app/services/user.service';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { access } from 'fs';
 
 @Component({
   selector: 'app-course-list',
