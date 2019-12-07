@@ -10,7 +10,7 @@ export class AttendanceService {
 
   constructor(private http: HttpClient) { }
 
-  API_URI = 'http://localhost:3000/api';
+  API_URI = '/api';
 
   geAttendance() {
     return this.http.get(`${this.API_URI}/attendance`);

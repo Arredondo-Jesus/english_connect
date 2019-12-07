@@ -10,7 +10,7 @@ export class StudentsService {
 
   constructor(private http: HttpClient) { }
 
-  API_URI = 'http://localhost:3000/api';
+  API_URI = '/api';
 
   getStudents() {
     return this.http.get(`${this.API_URI}/students`);

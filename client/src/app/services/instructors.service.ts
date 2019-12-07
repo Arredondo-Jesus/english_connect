@@ -10,7 +10,7 @@ export class InstructorsService {
 
   constructor(private http: HttpClient) { }
 
-  API_URI = 'http://localhost:3000/api';
+  API_URI = '/api';
 
   getInstructors() {
     return this.http.get(`${this.API_URI}/instructors`);

@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Course } from '../../models/Course';
 import { User } from '../../models/User';
 import { Router } from '@angular/router';
+import { CoursesService } from 'src/app/services/courses.service';
 
 @Component({
   selector: 'app-login-form',
@@ -24,7 +25,7 @@ export class LoginFormComponent implements OnInit {
     password: ''
   };
 
-  constructor(public afAuth: AngularFireAuth, private router: Router) {}
+  constructor(public afAuth: AngularFireAuth, private router: Router, private courseService: CoursesService) {}
 
   ngOnInit() {
     this.signOut();
@@ -33,7 +34,7 @@ export class LoginFormComponent implements OnInit {
   signIn() {
     return this.afAuth.auth.signInWithEmailAndPassword(this.user.username, this.user.password)
     .then((result) => {
-       this.router.navigate(['courses']);
+       this.getCourses();
     }).catch((error) => {
       window.alert(error.message);
     });
@@ -62,5 +63,15 @@ export class LoginFormComponent implements OnInit {
     }).catch((error) => {
       window.alert(error.message);
     });
+  }
+
+  getCourses() {
+    this.courseService.getCourses().subscribe(
+      res => {
+        this.courses = res;
+        console.log(res);
+      },
+      err => console.log(err)
+    );
   }
 }

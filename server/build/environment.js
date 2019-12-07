@@ -4,7 +4,7 @@
 // The list of file replacements can be found in `angular.json`.
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.environment = {
-    production: false,
+    production: true,
     firebase: {
         apiKey: 'AIzaSyBJqpLcAIwWlrQ4KhNYlhEbiztmkC5PQJM',
         authDomain: 'english-connect-64693.firebaseapp.com',
