@@ -21,9 +21,9 @@
     <div class="col text-center">{{course.instructorName}} {{course.last_name}}</div>
     <div [routerLink]="['/attendance/group', course.id]" class="col text-center"><button class="btn btn-link p-0">Attendance</button></div>
     <div [routerLink]="['/student/add', course.id]" class="col text-center"><button class="btn btn-link p-0">Enroll</button></div>
-    <div [routerLink]="['/course/edit', course.id]" *ngIf="permissions[5].access === 1"
+    <div [routerLink]="['/course/edit', course.id]"
           class="col text-center"><button class="btn btn-link p-0">Edit</button></div>
-    <div class="col text-center" *ngIf="permissions[5].access === 1">
+    <div class="col text-center">
       <button class="btn btn-link p-0" (click)="deleteCourse(course.id)">Delete</button>
     </div>
   </div>

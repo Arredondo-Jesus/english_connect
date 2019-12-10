@@ -27,6 +27,8 @@ export class CourseListComponent implements OnInit {
     instructorEmail: ''
   };
 
+  admin = false;
+
   constructor(private coursesService: CoursesService, private studentService: StudentsService, router: Router,
               private userService: UserService, private afAuth: AngularFireAuth) { }
 
