@@ -34,8 +34,9 @@ export class LoginFormComponent implements OnInit {
   signIn() {
     return this.afAuth.auth.signInWithEmailAndPassword(this.user.username, this.user.password)
     .then((result) => {
-       this.getCourses();
+       this.router.navigate(['courses']);
     }).catch((error) => {
+      this.router.navigateByUrl('login');
       window.alert(error.message);
     });
   }

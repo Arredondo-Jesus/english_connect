@@ -31,8 +31,8 @@ export class CourseListComponent implements OnInit {
               private userService: UserService, private afAuth: AngularFireAuth) { }
 
   ngOnInit() {
-    this.getPermissions(this.afAuth.auth.currentUser.email);
     this.email = this.afAuth.auth.currentUser.email;
+    this.getPermissions(this.email);
     this.getCourses();
   }
 
@@ -51,7 +51,7 @@ export class CourseListComponent implements OnInit {
 
     this.course.id = id;
     this.coursesService.deleteCourse(this.course.id, this.course).subscribe(
-      res => {
+      res =>  {
         console.log(res);
         this.getCourses();
       },

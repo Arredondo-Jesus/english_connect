@@ -22,7 +22,9 @@ export class AuthGuard implements CanLoad {
         res => {
           if (this.afAuth.auth.currentUser) {
             this.authenticated = true;
+            this.router.navigate(['/courses']);
           } else if (!this.afAuth.auth.currentUser) {
+            this.authenticated = false;
             this.router.navigate(['/login']);
           }
         },
