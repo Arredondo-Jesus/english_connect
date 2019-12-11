@@ -14,6 +14,7 @@ import { AttendanceListRegistrationComponent } from './components/attendance-lis
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { AuthGuard } from '../app/guards/auth.guard';
+import { Resolver } from '../app/resolver';
 
 const routes: Routes = [
   {
@@ -43,7 +44,8 @@ const routes: Routes = [
     path: 'courses',
     component: CourseListComponent,
     canLoad: [AuthGuard],
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    resolve: { permissions: Resolver }
   },
   {
     path: 'course/add',

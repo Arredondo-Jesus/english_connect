@@ -12,7 +12,7 @@
   <div class="col text-white text-center">Delete Course</div>
 </div>
 <div *ngFor="let course of courses">
-  <div class="row p-1 border border-secondary" *ngIf="course.instructorEmail === email || permissions[5].name === 'admin'">
+  <div class="row p-1 border border-secondary" *ngIf="course.instructorEmail === email">
     <div class="col text-center">{{course.name}} {{course.level}} {{course.year}}</div>
     <div class="col text-center">{{course.day}}</div>
     <div class="col text-center">{{course.time}}</div>

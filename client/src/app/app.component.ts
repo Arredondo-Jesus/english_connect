@@ -8,5 +8,5 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class AppComponent {
   constructor(public afAuth: AngularFireAuth) {}
-  title = 'client';
+  title = 'English Connect';
 }

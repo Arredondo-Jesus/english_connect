@@ -4,6 +4,7 @@ import { Course } from '../../models/Course';
 import { User } from '../../models/User';
 import { Router } from '@angular/router';
 import { CoursesService } from 'src/app/services/courses.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login-form',
@@ -13,6 +14,7 @@ import { CoursesService } from 'src/app/services/courses.service';
 export class LoginFormComponent implements OnInit {
 
   courses: any = [];
+  public permissions: any = [];
 
   course: Course = {
     id: 0,
@@ -25,7 +27,8 @@ export class LoginFormComponent implements OnInit {
     password: ''
   };
 
-  constructor(public afAuth: AngularFireAuth, private router: Router, private courseService: CoursesService) {}
+  constructor(public afAuth: AngularFireAuth, private router: Router, private courseService: CoursesService,
+              private userService: UserService) {}
 
   ngOnInit() {
     this.signOut();
@@ -34,7 +37,8 @@ export class LoginFormComponent implements OnInit {
   signIn() {
     return this.afAuth.auth.signInWithEmailAndPassword(this.user.username, this.user.password)
     .then((result) => {
-       this.router.navigate(['courses']);
+      this.getPermissions(this.user.username);
+      this.router.navigate(['courses']);
     }).catch((error) => {
       this.router.navigateByUrl('login');
       window.alert(error.message);
@@ -75,4 +79,14 @@ export class LoginFormComponent implements OnInit {
       err => console.log(err)
     );
   }
+
+  getPermissions(email: string) {
+    this.userService.getUserPermissions(email).subscribe(
+      res => {
+        this.permissions = res;
+        console.log(res);
+      },
+      err => console.log(err)
+    );
+}
 }

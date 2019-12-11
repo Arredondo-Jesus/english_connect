@@ -15,7 +15,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class CourseListComponent implements OnInit {
 
   courses: any = [];
-  permissions: any = [];
   email =  '';
 
   course: Course = {
@@ -29,12 +28,11 @@ export class CourseListComponent implements OnInit {
 
   admin = false;
 
-  constructor(private coursesService: CoursesService, private studentService: StudentsService, router: Router,
-              private userService: UserService, private afAuth: AngularFireAuth) { }
+  constructor(private coursesService: CoursesService, private studentService: StudentsService, private router: Router,
+              private userService: UserService, private afAuth: AngularFireAuth, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.email = this.afAuth.auth.currentUser.email;
-    this.getPermissions(this.email);
+    const email = this.afAuth.auth.currentUser.email;
     this.getCourses();
   }
 
@@ -60,15 +58,4 @@ export class CourseListComponent implements OnInit {
       err => console.log(err)
     );
   }
-
-  getPermissions(email: string) {
-    this.userService.getUserPermissions(email).subscribe(
-      res => {
-        console.log(res);
-        this.permissions = res;
-      },
-      err => console.log(err)
-    );
-  }
-
 }

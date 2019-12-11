@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { Permission } from 'src/app/models/Permission';
+import { timeout } from 'q';
 
 @Component({
   selector: 'app-navigation',
@@ -16,7 +17,8 @@ export class NavigationComponent implements OnInit {
 
   permission: Permission = {
     access: 0,
-    section: ''
+    section: '',
+    link: ''
   };
 
   admin = false;
@@ -25,12 +27,8 @@ export class NavigationComponent implements OnInit {
   constructor(public afAuth: AngularFireAuth, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
-    this.getPermissions(this.afAuth.auth.currentUser.email);
-    this.permissions.forEach(permission => {
-      this.permission = permission;
-      this.permissions[this.i] = this.permission;
-      this.i = this.i + 1;
-    });
+    const email = this.afAuth.auth.currentUser.email;
+    this.getPermissions(email);
   }
 
   signOut() {
@@ -40,13 +38,12 @@ export class NavigationComponent implements OnInit {
   }
 
   getPermissions(email: string) {
-    this.userService.getUserPermissions(email).subscribe(
-      res => {
-        console.log(res);
-        this.permissions = res;
-      },
-      err => console.log(err)
-    );
+      this.userService.getUserPermissions(email).subscribe(
+        res => {
+          this.permissions = res;
+          console.log(res);
+        },
+        err => console.log(err)
+      );
   }
-
 }
