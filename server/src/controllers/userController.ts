@@ -97,13 +97,15 @@ class UserController {
     public async getUserPermissions(req: Request, res: Response) {
       const { email } = req.params;
       const user = await pool.query(`SELECT u.email,
-                        r.name,
-                        p.section,
-                        p.access
-                        FROM user u
-                        JOIN role r ON r.id = u.role
-                        JOIN permissions p ON r.id = p.role 
-                        WHERE u.email = ?`, [email]);
+                                            p.access,
+                                            p.section,
+                                            p.link,
+                                            r.id,
+                                            r.name
+                                    FROM user u
+                                    JOIN role r ON r.id = u.role
+                                    JOIN permissions p ON r.id = p.role 
+                                    WHERE u.email = ?`, [email]);
       res.json(user);
     }
 

@@ -1,1 +1,2 @@
 web: node build/index.js
+server: npm build/index.js

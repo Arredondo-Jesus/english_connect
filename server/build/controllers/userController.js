@@ -121,9 +121,11 @@ class UserController {
         return __awaiter(this, void 0, void 0, function* () {
             const { email } = req.params;
             const user = yield database2_1.default.query(`SELECT u.email,
-                        r.name,
+                        p.access,
                         p.section,
-                        p.access
+                        p.link,
+                        r.id,
+                        r.name
                         FROM user u
                         JOIN role r ON r.id = u.role
                         JOIN permissions p ON r.id = p.role 

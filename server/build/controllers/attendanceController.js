@@ -65,7 +65,7 @@ class AttendanceController {
                             a.id
                         FROM attendance a
                         JOIN student s ON s.id = a.student_id
-                        JOIN course c ON C.id = s.course_id
+                        JOIN course c ON c.id = s.course_id
                         WHERE a.status = 'active'
                         AND c.id = ?
                         GROUP BY a.date`;
