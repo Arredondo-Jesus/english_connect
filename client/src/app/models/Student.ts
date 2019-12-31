@@ -5,6 +5,8 @@ export interface Student {
   age?: string;
   email?: string;
   phone?: string;
+  member?: string;
+  ward?: string;
   created_at?: Date;
   modified_on?: Date;
   status?: string;

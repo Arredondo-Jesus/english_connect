@@ -4,7 +4,7 @@
     <div class="card-body">
       <form>
           <div class="form-group">
-            <input type="text" name="name" #name="ngModel"placeholder="Instructor name" pattern="^[a-zA-Z\s]*$"
+            <input type="text" name="name" #name="ngModel"placeholder="Student name" pattern="^[a-zA-Z\s]*$"
           required [(ngModel)]="student.name" class="form-control" autofocus>
         </div>
         <div class="alert alert-danger" *ngIf="name.value === '' && name.dirty">
@@ -14,7 +14,7 @@
             Only letters are allowed
         </div>
         <div class="form-group">
-            <input type="text" name="lastName" #lastName="ngModel" placeholder="Instructor last name" pattern="^[a-zA-Z\s]*$"
+            <input type="text" name="lastName" #lastName="ngModel" placeholder="Student last name" pattern="^[a-zA-Z\s]*$"
             required [(ngModel)]="student.last_name" class="form-control" autofocus>
           </div>
           <div class="alert alert-danger" *ngIf="lastName.value === '' && lastName.dirty">
@@ -23,16 +23,14 @@
           <div class="alert alert-danger" *ngIf="lastName.invalid && lastName.dirty && lastName.value !== ''">
               Only letters are allowed
           </div>
-        <div class="form-group">
-            <input type="text" name="age" #age="ngModel" required pattern="\d{0,2}(\.\d{1,2})?"
-            placeholder="Student Age" [(ngModel)]="student.age" class="form-control">
-        </div>
-        <div class="alert alert-danger" *ngIf="age.invalid && age.dirty">
-            Age field is required
-        </div>
-        <div class="alert alert-danger" *ngIf="age.value === '' && age.dirty && age.value !== ''">
-            Up to 2 digits are allowed
-        </div>
+          <div class="form-group">
+            <select name="age" class="form-control"
+                    [(ngModel)]="student.age">
+              <option *ngFor="let age of ages let i = index"
+              [ngValue]="age"
+              [selected]="student.age === age && edit === true">{{age}}</option>
+            </select>
+          </div>
         <div class="form-group">
             <input type="email" name="email" #email="ngModel" required email placeholder="Email"
             [(ngModel)]="student.email" class="form-control" autofocus>
@@ -53,8 +51,24 @@
         <div class="alert alert-danger" *ngIf="phone.invalid && phone.dirty && phone.value !== ''">
             Only 10 digits are allowed
         </div>
+        <div class="form-group">
+          <select name="ward" class="form-control"
+                  [(ngModel)]="student.ward">
+            <option *ngFor="let ward of wards let i = index"
+            [ngValue]="ward"
+            [selected]="student.ward === ward && edit === true">{{ward}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select name="member" class="form-control"
+                  [(ngModel)]="student.member">
+            <option *ngFor="let member of members let i = index"
+            [ngValue]="member"
+            [selected]="student.member === member && edit === true">{{member}}</option>
+          </select>
+        </div>
         <button class="btn btn-danger btn-block" (click)="edit ? updateStudent() : saveNewStudent()"
-        [disabled]="!name.valid || !lastName.valid || !age.valid || !email.valid || !phone.valid">
+        [disabled]="!name.valid || !lastName.valid || !email.valid || !phone.valid">
           SAVE
         </button>
       </form>

@@ -4,6 +4,8 @@
   <div class="col text-white text-center">Age</div>
   <div class="col text-white text-center">Email</div>
   <div class="col text-white text-center">Phone</div>
+  <div class="col text-white text-center">Membership</div>
+  <div class="col text-white text-center">Ward</div>
   <div class="col text-white text-center">Status</div>
   <div class="col text-white text-center">Edit</div>
   <div class="col text-white text-center">Delete</div>
@@ -13,6 +15,8 @@
   <div class="col text-center">{{student.age}}</div>
   <div class="col text-center">{{student.email}}</div>
   <div class="col text-center">{{student.phone}}</div>
+  <div class="col text-center">{{student.member}}</div>
+  <div class="col text-center">{{student.ward}}</div>
   <div class="col text-center">{{student.status}}</div>
   <div [routerLink]="['/student/edit', student.id]" class="col text-center"><button class="btn btn-link p-0">Edit</button></div>
   <div class="col text-center"><button class="btn btn-link p-0" (click)="deleteStudent(student.id)">Delete</button></div>

@@ -15,7 +15,7 @@ export class CourseFormComponent implements OnInit {
   @HostBinding('class') classes = 'row';
 
   instructors: any = [];
-  buildings: any = ['Garcia', 'Lincoln', 'Hacienda', 'Valle Verde', 'Fryle'];
+  buildings: any = ['Garcia', 'Libramiento / Lincoln', 'Hacienda / Nogal', 'Valle Verde', 'Fryle / San Bernabe 1 / San Bernanbe 2'];
 
   course: Course = {
     id: 0,
