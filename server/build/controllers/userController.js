@@ -121,15 +121,15 @@ class UserController {
         return __awaiter(this, void 0, void 0, function* () {
             const { email } = req.params;
             const user = yield database2_1.default.query(`SELECT u.email,
-                        p.access,
-                        p.section,
-                        p.link,
-                        r.id,
-                        r.name
-                        FROM user u
-                        JOIN role r ON r.id = u.role
-                        JOIN permissions p ON r.id = p.role 
-                        WHERE u.email = ?`, [email]);
+                                            p.access,
+                                            p.section,
+                                            p.link,
+                                            r.id,
+                                            r.name
+                                    FROM user u
+                                    JOIN role r ON r.id = u.role
+                                    JOIN permissions p ON r.id = p.role 
+                                    WHERE u.email = ?`, [email]);
             res.json(user);
         });
     }

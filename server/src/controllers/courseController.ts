@@ -43,7 +43,7 @@ class CourseController {
 
     public async delete (req: Request, res: Response): Promise<void>{
         const { id } = req.params;
-        await pool.query('UPDATE course SET status = ? WHERE id = ?', [req.body, id]);
+        await pool.query('UPDATE course SET status = ? WHERE id = ?', [req.body.status, id]);
         res.json({text: 'Course ' + id + ' was deleted successfully'});
     }
 

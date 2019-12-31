@@ -29,7 +29,7 @@ class Server {
             res.header('Access-Control-Allow-Origin', '*');
             res.header('Access-Control-Allow-Headers', 'Origine, X-Requested-With, Content-Type, Accept, Authorization');
             if (req.method === 'OPTIONS') {
-                res.header('Access-Control-Allow-Methods', 'PUT, GET, PATCH, DELETE');
+                res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, PATCH, DELETE');
                 res.status(200).json({});
             }
             next();

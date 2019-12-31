@@ -9,7 +9,9 @@ import { FireBaseUser } from '../models/fireBaseUser';
 })
 export class UserService {
 
-  API_URI = '/api';
+  PROD = '/api';
+  DEV = 'localhost:3000/api';
+  API_URI = this.PROD;
 
   constructor(private http: HttpClient) { }
 
