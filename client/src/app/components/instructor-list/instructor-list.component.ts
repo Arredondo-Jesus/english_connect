@@ -12,6 +12,7 @@ import { Instructor } from 'src/app/models/Instructor';
 export class InstructorListComponent implements OnInit {
 
   instructors: any = [];
+  count = 0;
 
   intructor: Instructor = {
     id: 0,
@@ -28,6 +29,7 @@ export class InstructorListComponent implements OnInit {
     this.instructorsService.getInstructors().subscribe(
       res => {
         this.instructors = res;
+        this.count = this.instructors.length;
       },
       err => console.log(err)
     );

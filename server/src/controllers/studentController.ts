@@ -27,7 +27,8 @@ class StudentController {
                 s.name, 
                 s.last_name, 
                 a.attendance_value,
-                a.date
+                a.date,
+                a.lesson
         FROM attendance a 
         JOIN student s ON a.student_id = s.id
         JOIN course c ON s.course_id = c.id

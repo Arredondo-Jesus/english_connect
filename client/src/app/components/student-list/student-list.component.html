@@ -1,24 +1,33 @@
-<h3>Students</h3>
+<h3>Students {{count}}</h3>
 <div class="row bg-danger p-1">
-  <div class="col text-white text-center">Name</div>
-  <div class="col text-white text-center">Age</div>
-  <div class="col text-white text-center">Email</div>
-  <div class="col text-white text-center">Phone</div>
-  <div class="col text-white text-center">Membership</div>
-  <div class="col text-white text-center">Ward</div>
-  <div class="col text-white text-center">Status</div>
-  <div class="col text-white text-center">Edit</div>
-  <div class="col text-white text-center">Delete</div>
+  <div class="col-md-2 text-white text-center">Name</div>
+  <div class="col-md-1 text-white text-center">Age</div>
+  <div class="col-md-3 text-white text-center">Email</div>
+  <div class="col-md-1 text-white text-center">Phone</div>
+  <div class="col-md-1 text-white text-center">Membership</div>
+  <div class="col-md-1 text-white text-center">Ward</div>
+  <div class="col-md-1 text-white text-center">Status</div>
+  <div class="col-md-1 text-white text-center">Edit</div>
+  <div class="col-md-1 text-white text-center">Delete</div>
 </div>
-<div class="row p-1 border border-secondary" *ngFor="let student of students">
-  <div class="col text-center">{{student.name}} {{student.last_name}}</div>
-  <div class="col text-center">{{student.age}}</div>
-  <div class="col text-center">{{student.email}}</div>
-  <div class="col text-center">{{student.phone}}</div>
-  <div class="col text-center">{{student.member}}</div>
-  <div class="col text-center">{{student.ward}}</div>
-  <div class="col text-center">{{student.status}}</div>
-  <div [routerLink]="['/student/edit', student.id]" class="col text-center"><button class="btn btn-link p-0">Edit</button></div>
-  <div class="col text-center"><button class="btn btn-link p-0" (click)="deleteStudent(student.id)">Delete</button></div>
+<div class="row p-1 border border-secondary">
+  <div class="col-md-2"><input class="form-control" type="search" name="search" [(ngModel)]="searchName" placeholder="Name"></div>
+  <div class="col-md-1"><input class="form-control" type="search" name="search" [(ngModel)]="searchAge" placeholder="Age"></div>
+  <div class="col-md-3"><input class="form-control" type="search" name="search" [(ngModel)]="searchEmail" placeholder="Email"></div>
+  <div class="col-md-1"><input class="form-control" type="search" name="search" [(ngModel)]="searchPhone" placeholder="Phone"></div>
+  <div class="col-md-1"><input class="form-control" type="search" name="search" [(ngModel)]="searchMember" placeholder="Member"></div>
+  <div class="col-md-1"><input class="form-control" type="search" name="search" [(ngModel)]="searchWard" placeholder="Ward"></div>
+  <div class="col-md-1"><input class="form-control" type="search" name="search" [(ngModel)]="searchStatus" placeholder="Status"></div>
+</div>
+<div id="table" class="row p-1 border border-secondary" *ngFor="let student of filteredStudents">
+  <div class="col-md-2 text-center">{{student.name}} {{student.last_name}}</div>
+  <div class="col-md-1 text-center">{{student.age}}</div>
+  <div class="col-md-3 text-center">{{student.email}}</div>
+  <div class="col-md-1 text-center">{{student.phone}}</div>
+  <div class="col-md-1 text-center">{{student.member}}</div>
+  <div class="col-md-1 text-center">{{student.ward}}</div>
+  <div class="col-md-1 text-center">{{student.status}}</div>
+  <div [routerLink]="['/student/edit', student.id]" class="col-md-1 text-center"><button class="btn btn-link p-0">Edit</button></div>
+  <div class="col-md-1 text-center"><button class="btn btn-link p-0" (click)="deleteStudent(student.id)">Delete</button></div>
 </div>
 

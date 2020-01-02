@@ -15,6 +15,7 @@ import { AttendanceService } from '../../services/attendance.service';
 export class StudentListGroupComponent implements OnInit {
 
   students: any = [];
+  count = 0;
 
   edit = false;
 
@@ -29,7 +30,8 @@ export class StudentListGroupComponent implements OnInit {
   attendance: Attendance = {
     id: 0,
     date: new Date(),
-    attendance_value: ''
+    attendance_value: '',
+    lesson: 0
   };
 
   constructor(private studentService: StudentsService, private router: Router, private activatedRoute: ActivatedRoute,
@@ -47,6 +49,7 @@ export class StudentListGroupComponent implements OnInit {
     this.studentService.getStudentsByGroup(this.course.id, this.attendance.date).subscribe(
       res => {
         this.students = res;
+        this.count = this.students.length;
       },
       err => console.log(err)
     );

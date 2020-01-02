@@ -17,6 +17,7 @@ export class AttendanceListComponent implements OnInit {
   today: any = new Date();
   attendanceList: any = [];
   options: any = [{option: '1'}];
+  count = 0;
 
   attendance: Attendance = {
     id: 0,
@@ -62,6 +63,7 @@ export class AttendanceListComponent implements OnInit {
     this.attendanceService.geAttendanceByDate(this.course.id).subscribe(
       res => {
         this.attendanceList = res;
+        this.count = this.attendanceList.length;
       },
       err => console.log(err)
     );

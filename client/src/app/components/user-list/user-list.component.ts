@@ -13,6 +13,7 @@ export class UserListComponent implements OnInit {
 
   users: any = [];
   fireBaseUsers: any = [];
+  count = 0;
 
   user: User = {
     uid: '',
@@ -41,6 +42,7 @@ export class UserListComponent implements OnInit {
       res => {
         console.log(res);
         this.users = res;
+        this.count = this.users.length;
         this.users.forEach(user => {
           this.fireBaseUser.role = user.role;
         });

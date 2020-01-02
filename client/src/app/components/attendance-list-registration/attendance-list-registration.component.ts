@@ -22,6 +22,7 @@ export class AttendanceListRegistrationComponent implements OnInit {
 
   attendanceValues: any = [];
   attendanceList: any = [];
+  count = 0;
 
   attendance: Attendance  = {
     id: 0,
@@ -82,6 +83,7 @@ export class AttendanceListRegistrationComponent implements OnInit {
           console.log(this.attendanceValues);
           this.studentList = res;
           this.attendance.lesson = 1;
+          this.count = this.studentList.length;
           for (const student of this.studentList) {
             this.attendanceValues.push('Yes');
           }
@@ -92,6 +94,7 @@ export class AttendanceListRegistrationComponent implements OnInit {
       this.attendanceService.getAttendanceByGroup(this.course.id, this.attendance.date).subscribe(
         res => {
           this.studentList = res;
+          this.count = this.attendanceList.length;
           console.log(res);
           this.today = this.datePipe.transform(this.studentList[0].date, 'yyyy-MM-dd');
           this.attendance.date = this.today;
@@ -110,6 +113,7 @@ export class AttendanceListRegistrationComponent implements OnInit {
       res => {
         this.attendanceList = res;
         console.log(res);
+        this.count = this.attendanceList.length;
       },
       err => console.log(err)
     );
