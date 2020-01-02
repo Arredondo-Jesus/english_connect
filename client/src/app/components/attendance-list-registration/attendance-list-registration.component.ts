@@ -22,7 +22,10 @@ export class AttendanceListRegistrationComponent implements OnInit {
 
   attendanceValues: any = [];
   attendanceList: any = [];
+  filteredStudents: any = [];
   count = 0;
+
+  private searchValue: string;
 
   attendance: Attendance  = {
     id: 0,
@@ -46,6 +49,21 @@ export class AttendanceListRegistrationComponent implements OnInit {
   };
 
   edit = false;
+
+  get seachName(): string {
+    return this.searchValue;
+  }
+
+  set searchName(value: string) {
+    this.searchValue = value;
+    this.filteredStudents = this.filterName(value);
+    this.count = this.filteredStudents.length;
+  }
+
+  filterName(searchString: string) {
+    return this.studentList.filter(student =>
+      student.name.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
+  }
 
   constructor(private attendanceService: AttendanceService, private router: Router, private activatedRoute: ActivatedRoute,
               private datePipe: DatePipe) {
@@ -82,6 +100,7 @@ export class AttendanceListRegistrationComponent implements OnInit {
         res => {
           console.log(this.attendanceValues);
           this.studentList = res;
+          this.filteredStudents = this.studentList;
           this.attendance.lesson = 1;
           this.count = this.studentList.length;
           for (const student of this.studentList) {
@@ -94,6 +113,7 @@ export class AttendanceListRegistrationComponent implements OnInit {
       this.attendanceService.getAttendanceByGroup(this.course.id, this.attendance.date).subscribe(
         res => {
           this.studentList = res;
+          this.filteredStudents = this.studentList;
           this.count = this.attendanceList.length;
           console.log(res);
           this.today = this.datePipe.transform(this.studentList[0].date, 'yyyy-MM-dd');

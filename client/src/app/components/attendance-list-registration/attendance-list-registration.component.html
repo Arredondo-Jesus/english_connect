@@ -22,7 +22,12 @@
               <div class="col text-white text-center">Name</div>
               <div class="col text-white text-center">Value</div>
             </div>
-            <div id="table" class="row p-1 border border-secondary" *ngFor="let student of studentList let i = index">
+
+            <div class="row p-1 border border-secondary">
+              <div class="col-md-4"><input class="form-control" type="search" name="search" [(ngModel)]="searchName" placeholder="Name"></div>
+            </div>
+
+            <div id="table" class="row p-1 border border-secondary" *ngFor="let student of filteredStudents let i = index">
               <div class="col text-center" [class.green]="attendanceValues[i]=='Yes'" [class.red]="attendanceValues[i]=='No'">
                 {{i+1}}
               </div>
