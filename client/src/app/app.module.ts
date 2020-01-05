@@ -35,6 +35,8 @@ import { environment } from 'src/environments/environment';
 
 import { AuthGuard } from '../app/guards/auth.guard';
 import { Resolver } from './resolver';
+import { RegisterComponent } from './components/register/register.component';
+import { NonAuthNavigationComponent } from './components/non-auth-navigation/non-auth-navigation.component';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -67,7 +69,9 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     AttendanceListRegistrationComponent,
     AttendanceListEditComponent,
     UserFormComponent,
-    UserListComponent
+    UserListComponent,
+    RegisterComponent,
+    NonAuthNavigationComponent
   ],
   imports: [
     BrowserModule,

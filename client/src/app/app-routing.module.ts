@@ -15,12 +15,17 @@ import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { AuthGuard } from '../app/guards/auth.guard';
 import { Resolver } from '../app/resolver';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'register',
     pathMatch: 'full'
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
   },
   {
     path: 'attendance/group/:id',
@@ -97,9 +102,7 @@ const routes: Routes = [
   },
   {
     path: 'student/add/:cid',
-    component: StudentFormComponent,
-    canLoad: [AuthGuard],
-    canActivate: [AuthGuard]
+    component: StudentFormComponent
   },
   {
     path: 'student/edit/:sid',

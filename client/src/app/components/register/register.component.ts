@@ -8,24 +8,21 @@ import { UserService } from 'src/app/services/user.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
-  selector: 'app-course-list',
-  templateUrl: './course-list.component.html',
-  styleUrls: ['./course-list.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class CourseListComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
   courses: any = [];
   filteredCourses: any = [];
-  permissions: any = [];
-  email =  '';
   count = 0;
-
-  private searchValue: string;
+  currentYear = new Date().getFullYear().toString();
 
   course: Course = {
     id: 0,
     name: '',
-    year: '',
+    year: new Date().getFullYear().toString(),
     status: 'inactive',
     count: 0,
     instructorName: '',
@@ -34,9 +31,7 @@ export class CourseListComponent implements OnInit {
     building: ''
   };
 
-  admin = false;
-  available = true;
-  currentYear = new Date().getFullYear().toString();
+  private searchValue: string;
 
   get seachName(): string {
     return this.searchValue;
@@ -147,8 +142,6 @@ export class CourseListComponent implements OnInit {
               private userService: UserService, private afAuth: AngularFireAuth, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.email = this.afAuth.auth.currentUser.email;
-    this.getPermissions(this.email);
     this.getCourses();
   }
 
@@ -156,37 +149,11 @@ export class CourseListComponent implements OnInit {
     this.coursesService.getCourses().subscribe(
       res => {
         this.courses = res;
-        this.filteredCourses = this.courses;
+        this.filteredCourses = this.filterYear(this.course.year);
         console.log(res);
         this.count = this.courses.length;
       },
       err => console.log(err)
     );
   }
-
-  deleteCourse(id: number) {
-    delete this.course.count;
-
-    this.course.id = id;
-    this.coursesService.deleteCourse(this.course.id, this.course).subscribe(
-      res =>  {
-        console.log(res);
-        this.getCourses();
-      },
-      err => console.log(err)
-    );
-  }
-
-  getPermissions(email: string) {
-    this.userService.getUserPermissions(email).subscribe(
-      res => {
-        this.permissions = res;
-        if (this.permissions[0].name === 'admin') {
-          this.admin = true;
-        }
-        console.log(res);
-      },
-      err => console.log(err)
-    );
-}
 }

@@ -21,7 +21,8 @@ class CourseController {
                                         JOIN instructor i ON i.id = c.instructor_id
                                         LEFT OUTER JOIN student s ON s.course_id = c.id
                                         WHERE c.status = 'active'
-                                        GROUP BY c.id`);
+                                        GROUP BY c.id
+                                        ORDER BY c.year DESC, i.name ASC`);
         res.json(courses);
     }
 

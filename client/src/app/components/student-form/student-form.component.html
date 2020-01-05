@@ -1,27 +1,27 @@
 <div class="col-md-6 offset-3">
-  <h3>Add / Edit Student</h3>
+  <h3>Agregar / Editar Student</h3>
   <div class="card">
     <div class="card-body">
       <form>
           <div class="form-group">
-            <input type="text" name="name" #name="ngModel"placeholder="Student name" pattern="^[a-zA-Z\s]*$"
+            <input type="text" name="name" #name="ngModel"placeholder="Nombre" pattern="^[a-zA-Z\s]*$"
           required [(ngModel)]="student.name" class="form-control" autofocus>
         </div>
         <div class="alert alert-danger" *ngIf="name.value === '' && name.dirty">
-            The student name is required
+            Campo Obligatorio
         </div>
         <div class="alert alert-danger" *ngIf="name.invalid && name.dirty && name.value !== ''">
-            Only letters are allowed
+            Solo se permiten letras
         </div>
         <div class="form-group">
-            <input type="text" name="lastName" #lastName="ngModel" placeholder="Student last name" pattern="^[a-zA-Z\s]*$"
+            <input type="text" name="lastName" #lastName="ngModel" placeholder="Apellido(s)" pattern="^[a-zA-Z\s]*$"
             required [(ngModel)]="student.last_name" class="form-control" autofocus>
           </div>
           <div class="alert alert-danger" *ngIf="lastName.value === '' && lastName.dirty">
-              The student last name is required
+              Campo Obligatorio
           </div>
           <div class="alert alert-danger" *ngIf="lastName.invalid && lastName.dirty && lastName.value !== ''">
-              Only letters are allowed
+              Solo se permiten letras
           </div>
           <div class="form-group">
             <select name="age" class="form-control"
@@ -32,24 +32,24 @@
             </select>
           </div>
         <div class="form-group">
-            <input type="email" name="email" #email="ngModel" required email placeholder="Email"
+            <input type="email" name="email" #email="ngModel" required email placeholder="Correo electronico"
             [(ngModel)]="student.email" class="form-control" autofocus>
         </div>
         <div class="alert alert-danger" *ngIf="email.value === '' && email.dirty">
-            Email field is required
+            Campo Obligatorio
         </div>
         <div class="alert alert-danger" *ngIf="email?.errors?.email && email.touched && email.dirty">
-          Email format not valid.
+          Formato de correo no valido.
         </div>
         <div class="form-group">
             <input type="text" name="phone" #phone="ngModel" pattern="[0-9]{10}"
-            required placeholder="Student Phone" [(ngModel)]="student.phone" class="form-control">
+            required placeholder="Telefono del estudiante" [(ngModel)]="student.phone" class="form-control">
         </div>
         <div class="alert alert-danger" *ngIf="phone.value === '' && phone.dirty">
-            Phone field is required
+            Campo Obligatorio
         </div>
         <div class="alert alert-danger" *ngIf="phone.invalid && phone.dirty && phone.value !== ''">
-            Only 10 digits are allowed
+            Solo se permiten 10 digitos
         </div>
         <div class="form-group">
           <select name="ward" class="form-control"
@@ -69,7 +69,7 @@
         </div>
         <button class="btn btn-danger btn-block" (click)="edit ? updateStudent() : saveNewStudent()"
         [disabled]="!name.valid || !lastName.valid || !email.valid || !phone.valid">
-          SAVE
+          Guardar
         </button>
       </form>
     </div>

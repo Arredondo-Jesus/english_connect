@@ -1,58 +1,58 @@
 <div class="col-md-6 offset-3">
-  <h3>Add / Edit Course</h3>
+  <h3>Agregar / Editar Courso</h3>
   <div class="card">
     <div class="card-body">
       <form #courseForm="ngForm">
         <div class="form-group">
-          <input type="text" name="course" #name="ngModel" placeholder="Course name" pattern="^[a-zA-Z\s]*$"
+          <input type="text" name="course" #name="ngModel" placeholder="Nombre del curso" pattern="^[a-zA-Z\s]*$"
           required [(ngModel)]="course.name" class="form-control" autofocus>
         </div>
         <div class="alert alert-danger" *ngIf="name.value === '' && name.dirty">
-            The course name is required
+            Campo Obligatorio
         </div>
         <div class="alert alert-danger" *ngIf="name.invalid && name.dirty && name.value !== ''">
-            Only letters are allowed
+            Solo se permiten letras
         </div>
         <div class="form-group">
             <input type="text" name="level" #level="ngModel" pattern="[0-3]{1}"
-            placeholder="Course level" required [(ngModel)]="course.level" class="form-control">
+            placeholder="Nivel" required [(ngModel)]="course.level" class="form-control">
         </div>
         <div class="alert alert-danger" *ngIf="level.value === '' && level.dirty">
-            The course level is required
+            Campo Obligatorio
         </div>
         <div class="alert alert-danger" *ngIf="level.invalid && level.dirty && level.value !== ''">
-            Only numbers from 1-3 allowed
+            Solo numeros del 1 al 3
         </div>
         <div class="form-group">
             <input type="text" name="year" #year="ngModel" pattern="[0-9]{4}"
-            placeholder="Year in which the course will be opened" required [(ngModel)]="course.year" class="form-control">
+            placeholder="Año en que se abrira el curso" required [(ngModel)]="course.year" class="form-control">
         </div>
         <div class="alert alert-danger" *ngIf="year.value === '' && year.dirty">
-            The course year is required
+            Campo Obligatorio
         </div>
         <div class="alert alert-danger" *ngIf="year.invalid && year.dirty && year.value !== ''">
-            Only 4 numbers are allowed
+            Solo se permiten 4 numeros
         </div>
         <div class="form-group">
-            <input type="text" name="day" #day="ngModel" placeholder="Day of the course"
-            pattern="\b(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\b"
+            <input type="text" name="day" #day="ngModel" placeholder="Dia en que se tendra el curso"
+            pattern="\b(Lunes|Martes|Miercoles|Jueves|Viernes|Sabado|Domingo)\b"
             required [(ngModel)]="course.day" class="form-control">
         </div>
         <div class="alert alert-danger" *ngIf="day.value === '' && day.dirty">
-            The course day is required
+            Campo Obligatorio
         </div>
         <div class="alert alert-danger" *ngIf="day.invalid && day.dirty && day.value !== ''">
-            Enter the day like Monday
+            Escriba el dia por ejemplo Lunes
         </div>
         <div class="form-group">
-            <input type="text" name="time" #time="ngModel" placeholder="Time of the course" pattern="\b((1[0-2]|0?[1-9]):([0-5][0-9]) ([AP][M]))"
+            <input type="text" name="time" #time="ngModel" placeholder="Hora del curso" pattern="\b((1[0-2]|0?[1-9]):([0-5][0-9]) ([AP][M]))"
             required [(ngModel)]="course.time" class="form-control">
         </div>
         <div class="alert alert-danger" *ngIf="time.invalid && time.dirty && time.value !== ''">
-            Time should be in the format h:mm PM / AM
+            La hora debe ir en el siguiente formato h:mm PM / AM
         </div>
         <div class="alert alert-danger" *ngIf="time.value === '' && time.dirty">
-            The course time is required
+            Campo Obligatorio
         </div>
         <div class="form-group">
           <select name="building" class="form-control"
@@ -72,7 +72,7 @@
         </div>
         <button class="btn btn-primary btn-block" (click)="edit ? updateCourse() : saveNewCourse()"
                 [disabled]="!name.valid || !level.valid || !year.valid || !day.valid || !time.valid" >
-          SAVE
+          Guardar
         </button>
       </form>
     </div>

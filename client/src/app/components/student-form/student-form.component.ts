@@ -16,20 +16,20 @@ export class StudentFormComponent implements OnInit {
   @HostBinding('class') classes = 'row';
 
   wards: any = ['Garcia', 'Lincoln', 'Libramiento', 'Hacienda', 'Nogal', 'San Bernabe 1', 'San Bernabe 2', 'Frayle', 'Valle Verde' ];
-  ages: any = ['Over 18', 'Under 18'];
-  members: any = ['Member of the church', 'Not member of the church'];
+  ages: any = ['Mayor de 17', 'Entre 12 y 17'];
+  members: any = ['Miembro de la Iglesia', 'No miembro es de la iglesia'];
 
   student: Student = {
     id: 0,
     name: '',
     last_name: '',
-    age: 'Over 18',
+    age: 'Mayor de 17',
     email: '',
     phone: '',
     created_at: new Date(),
     status: '',
     course_id: 0,
-    member: 'Member of the church',
+    member: 'Miembro de la Iglesia',
     ward: 'Garcia'
   };
 

@@ -21,14 +21,15 @@ export class NavigationComponent implements OnInit {
     link: ''
   };
 
+  email = '';
   admin = false;
   i = 0;
 
   constructor(public afAuth: AngularFireAuth, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
-    const email = this.afAuth.auth.currentUser.email;
-    this.getPermissions(email);
+    this.email = this.afAuth.auth.currentUser.email;
+    this.getPermissions(this.email);
   }
 
   signOut() {
