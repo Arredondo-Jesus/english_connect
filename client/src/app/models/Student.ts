@@ -11,4 +11,5 @@ export interface Student {
   modified_on?: Date;
   status?: string;
   course_id?: number;
+  registration?: boolean;
 }

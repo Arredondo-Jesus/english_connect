@@ -17,7 +17,7 @@ export class StudentFormComponent implements OnInit {
 
   wards: any = ['Garcia', 'Lincoln', 'Libramiento', 'Hacienda', 'Nogal', 'San Bernabe 1', 'San Bernabe 2', 'Frayle', 'Valle Verde' ];
   ages: any = ['Mayor de 17', 'Entre 12 y 17'];
-  members: any = ['Miembro de la Iglesia', 'No miembro es de la iglesia'];
+  members: any = ['Miembro de la Iglesia', 'No miembro de la iglesia'];
 
   student: Student = {
     id: 0,
@@ -34,6 +34,7 @@ export class StudentFormComponent implements OnInit {
   };
 
   edit = false;
+  registration = false;
 
   constructor(private studentsService: StudentsService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -66,9 +67,13 @@ export class StudentFormComponent implements OnInit {
       .subscribe(
         res => {
           console.log(this.activatedRoute.snapshot.params.cid);
-          this.router.navigate(['students/group/', this.student.course_id]);
+          this.router.navigate(['student/add']);
+          this.registration = true;
         },
-         err => console.log(err)
+         err => {
+          console.log(err);
+          this.registration = false;
+         }
       );
 
   }

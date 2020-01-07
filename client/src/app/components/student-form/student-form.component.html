@@ -3,6 +3,9 @@
   <div class="card">
     <div class="card-body">
       <form>
+          <div class="alert alert-success" *ngIf="registration">
+            Se dio de alta exitosamente
+          </div>
           <div class="form-group">
             <input type="text" name="name" #name="ngModel"placeholder="Nombre" pattern="^[a-zA-Z\s]*$"
           required [(ngModel)]="student.name" class="form-control" autofocus>
@@ -68,7 +71,7 @@
           </select>
         </div>
         <button class="btn btn-danger btn-block" (click)="edit ? updateStudent() : saveNewStudent()"
-        [disabled]="!name.valid || !lastName.valid || !email.valid || !phone.valid">
+        [disabled]="!name.valid || !lastName.valid || !email.valid || !phone.valid || registration">
           Guardar
         </button>
       </form>
